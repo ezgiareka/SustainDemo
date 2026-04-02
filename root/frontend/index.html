@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İklim Fuarı - Seçim Oyunu</title>
+    <style>
+      :root {
+        --bg-1: #ecfdf3;
+        --bg-2: #d1fae5;
+        --card: #ffffff;
+        --text: #14532d;
+        --muted: #4d7c5a;
+        --primary: #16a34a;
+        --primary-dark: #15803d;
+        --danger: #dc2626;
+        --border: #86efac;
+        --shadow: 0 14px 30px rgba(20, 83, 45, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at 10% 20%, var(--bg-2) 0%, var(--bg-1) 55%),
+          linear-gradient(135deg, #f0fdf4, #dcfce7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 520px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .logo-wrap {
+        width: 100%;
+        max-width: 520px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 14px;
+      }
+
+      .logo {
+        width: min(260px, 70vw);
+        height: auto;
+      }
+
+      .screen {
+        display: none;
+        padding: 26px 18px;
+      }
+
+      .screen.active {
+        display: block;
+      }
+
+      h1,
+      h2 {
+        margin: 0 0 18px;
+        text-align: center;
+        line-height: 1.25;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+      }
+
+      h2 {
+        font-size: 1.45rem;
+      }
+
+      .subtitle {
+        margin: 0 0 22px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .options {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .option-btn {
+        width: 100%;
+        border: 1px solid #bbf7d0;
+        background: #f0fdf4;
+        color: #166534;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+      }
+
+      .option-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .option-btn.selected {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary-dark);
+      }
+
+      .action-btn {
+        width: 100%;
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        background: var(--primary);
+        color: #ffffff;
+        transition: opacity 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
+      }
+
+      .action-btn:hover:enabled {
+        transform: translateY(-1px);
+        background: var(--primary-dark);
+      }
+
+      .action-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .secondary-btn {
+        width: 100%;
+        border: 1px solid #86efac;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        background: #f0fdf4;
+        color: #166534;
+        transition: transform 0.15s ease, background-color 0.2s ease;
+      }
+
+      .secondary-btn:hover {
+        transform: translateY(-1px);
+        background: #dcfce7;
+      }
+
+      .nav-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: linear-gradient(to right, #dcfce7 0%, #dcfce7 50%, #bbf7d0 50%, #bbf7d0 100%);
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary);
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      input[type="range"]::-webkit-slider-thumb:hover {
+        background: var(--primary-dark);
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary);
+        cursor: pointer;
+        border: none;
+        transition: background 0.2s;
+      }
+
+      input[type="range"]::-moz-range-thumb:hover {
+        background: var(--primary-dark);
+      }
+
+      .slider-display {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .result {
+        text-align: center;
+      }
+
+      .result-message {
+        margin: 0 0 12px;
+        font-size: 1.45rem;
+        font-weight: 800;
+      }
+
+      .result-message.success {
+        color: var(--primary-dark);
+      }
+
+      .result-message.fail {
+        color: var(--danger);
+      }
+
+      .emission {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .error {
+        text-align: center;
+        margin: 0 0 14px;
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      @media (max-width: 480px) {
+        .screen {
+          padding: 22px 14px;
+        }
+
+        h1 {
+          font-size: 1.65rem;
+        }
+
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        .option-btn,
+        .action-btn {
+          padding: 13px;
+          font-size: 0.98rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo-wrap">
+      <img src="https://www.areka.ai/img/ArekaTopLogo.png" alt="Areka Logo" class="logo" />
+    </div>
+    <main class="app">
+      <section id="screen-welcome" class="screen active">
+        <h1>Ne Kadar Yeşilsin</h1>
+        <p class="subtitle">Doğa dostu seçimler yaparak karbon ayak izinizi öğrenin.</p>
+        <button id="start-btn" class="action-btn" type="button">Başla</button>
+      </section>
+
+      <section id="screen-transport" class="screen">
+        <h2>Festivale Nasıl Geldin?</h2>
+        <div class="options" id="transport-options">
+          <button class="option-btn" data-value="metro" type="button">Metro/Otobüs 🚇</button>
+          <button class="option-btn" data-value="araba" type="button">Araba 🚗</button>
+          <button class="option-btn" data-value="yuruyerek_bisiklet" type="button">Yürüyerek/Bisiklet 🚶‍♀️🚲</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-welcome-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-food-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-food" class="screen">
+        <h2>Yemek Tercihiniz?</h2>
+        <div class="options" id="food-options">
+          <button class="option-btn" data-value="etli" type="button">Etli Yemek 🥩</button>
+          <button class="option-btn" data-value="vegan" type="button">Vegan 🌱</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-transport-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-drink-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-drink" class="screen">
+        <h2>Şişelenmiş Su İçiyor Musunuz?</h2>
+        <div class="options" id="drink-options">
+          <button class="option-btn" data-value="evet" type="button">Evet 💧</button>
+          <button class="option-btn" data-value="hayir" type="button">Hayır 🚫</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-food-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-coffee-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+      <section id="screen-coffee" class="screen">
+        <h2>Kahve Tercihiniz?</h2>
+        <div class="options" id="coffee-options">
+          <button class="option-btn" data-value="Termos" type="button">Termos ☕</button>
+          <button class="option-btn" data-value="Tek Kullanimlik" type="button">Tek Kullanımlık ☕</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-drink-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-media-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+      <section id="screen-media" class="screen">
+        <h2>Sosyal Medya Paylaşımı Yaptın Mı?</h2>
+        <div class="options" id="media-options">
+          <button class="option-btn" data-value="evet" type="button">Sürdürülebilirlikle ilgili paylaştım.📱</button>
+          <button class="option-btn" data-value="eglence_icin" type="button">Sadece eğlence için paylaştım.🎉</button>
+          <button class="option-btn" data-value="hayir" type="button">Hayır, paylaşmadım.🚫</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-coffee-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-cop-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-cop" class="screen">
+        <h2>Çöpünü ne yaparsın?</h2>
+        <div class="options" id="cop-options">
+          <button class="option-btn" data-value="dikkatsiz" type="button">Dikkat etmeden atıyorum 🗑️</button>
+          <button class="option-btn" data-value="sinirli" type="button">Atıklarımı sınırlıyorum ♻️</button>
+          <button class="option-btn" data-value="sifir" type="button">Ben sıfır atıkçıyım 🌿</button>
+          <button class="option-btn" data-value="kompost" type="button">Kompost yapıyorum 🌱</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-media-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-trivia-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-trivia" class="screen">
+        <h2>Kapalı bir ortamda hangisi daha fazla hava temizler?</h2>
+        <div class="options" id="trivia-options">
+          <button class="option-btn" data-value="areka" type="button">Areka Bitkisi 🌴</button>
+          <button class="option-btn" data-value="sarmasik" type="button">Sarmaşık 🍃</button>
+          <button class="option-btn" data-value="kaktus" type="button">Kaktüs 🌵</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-cop-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-bm-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-bm" class="screen">
+        <h2>Birleşmiş Milletler'in Sürdürülebilir Kalkınma Amaçları kaç tanedir?</h2>
+        <div class="options" id="bm-options">
+          <button class="option-btn" data-value="5" type="button">5</button>
+          <button class="option-btn" data-value="10" type="button">10</button>
+          <button class="option-btn" data-value="17" type="button">17</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-trivia-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-internet-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-internet" class="screen">
+        <h2>Günde kaç saat internet kullanıyorsunuz?</h2>
+        <input type="range" id="internet-slider" min="0" max="16" step="1" value="4" />
+        <div class="slider-display" id="internet-display">4 saat</div>
+        <div class="nav-row">
+          <button id="back-to-bm-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-seyahat-btn" class="action-btn" type="button">Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-seyahat" class="screen">
+        <h2>Son üç yılda ne sıklıkla uçakla seyahat ettiniz?</h2>
+        <div id="seyahat-options" class="options">
+          <button class="option-btn" data-value="hic" type="button">Hiç uçmadım ✈️❌</button>
+          <button class="option-btn" data-value="az" type="button">1-2 kez 🌍</button>
+          <button class="option-btn" data-value="orta" type="button">3-5 kez ✈️</button>
+          <button class="option-btn" data-value="cok" type="button">6+ kez 🚀</button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-internet-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="calculate-btn" class="action-btn" type="button" disabled>Sonucu Gör</button>
+        </div>
+      </section>
+
+      <section id="screen-result" class="screen">
+        <div class="result">
+          <p id="result-message" class="result-message">Hesaplanıyor...</p>
+          <p id="result-emission" class="emission"></p>
+          <p id="result-error" class="error" hidden></p>
+          <div class="nav-row">
+            <button id="back-to-seyahat-btn" class="secondary-btn" type="button">Geri</button>
+            <button id="retry-btn" class="action-btn" type="button">Yeniden Dene</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const screens = {
+        welcome: document.getElementById("screen-welcome"),
+        transport: document.getElementById("screen-transport"),
+        food: document.getElementById("screen-food"),
+        drink: document.getElementById("screen-drink"),
+        coffee:document.getElementById("screen-coffee"),
+        media: document.getElementById("screen-media"),
+        cop: document.getElementById("screen-cop"),
+        trivia: document.getElementById("screen-trivia"),
+        bm: document.getElementById("screen-bm"),
+        internet: document.getElementById("screen-internet"),
+        seyahat: document.getElementById("screen-seyahat"),
+        result: document.getElementById("screen-result"),
+      };
+
+      const startBtn = document.getElementById("start-btn");
+      const backToWelcomeBtn = document.getElementById("back-to-welcome-btn");
+      const backToTransportBtn = document.getElementById("back-to-transport-btn");
+      const backToFoodBtn = document.getElementById("back-to-food-btn");
+      const backToDrinkBtn = document.getElementById("back-to-drink-btn");
+      const backToCoffeeBtn = document.getElementById("back-to-coffee-btn");
+      const backToMediaBtn = document.getElementById("back-to-media-btn");
+      const backToCopBtn = document.getElementById("back-to-cop-btn");
+      const backToTriviaBtn = document.getElementById("back-to-trivia-btn");
+      const backToBmBtn = document.getElementById("back-to-bm-btn");
+      const backToInternetBtn = document.getElementById("back-to-internet-btn");
+      const backToSeyahatBtn = document.getElementById("back-to-seyahat-btn");
+      const toFoodBtn = document.getElementById("to-food-btn");
+      const toDrinkBtn = document.getElementById("to-drink-btn");
+      const toCoffeeBtn = document.getElementById("to-coffee-btn");
+      const toMediaBtn = document.getElementById("to-media-btn");
+      const toCopBtn = document.getElementById("to-cop-btn");
+      const toTriviaBtn = document.getElementById("to-trivia-btn");
+      const toBmBtn = document.getElementById("to-bm-btn");
+      const toInternetBtn = document.getElementById("to-internet-btn");
+      const toSeyahatBtn = document.getElementById("to-seyahat-btn");
+      const calculateBtn = document.getElementById("calculate-btn");
+      const retryBtn = document.getElementById("retry-btn");
+
+      const transportButtons = Array.from(document.querySelectorAll("#transport-options .option-btn"));
+      const foodButtons = Array.from(document.querySelectorAll("#food-options .option-btn"));
+      const drinkButtons = Array.from(document.querySelectorAll("#drink-options .option-btn"));
+      const coffeeButtons = Array.from(document.querySelectorAll("#coffee-options .option-btn"));
+      const mediaButtons = Array.from(document.querySelectorAll("#media-options .option-btn"));
+      const copButtons = Array.from(document.querySelectorAll("#cop-options .option-btn"));
+      const triviaButtons = Array.from(document.querySelectorAll("#trivia-options .option-btn"));
+      const bmButtons = Array.from(document.querySelectorAll("#bm-options .option-btn"));
+      const seyahatButtons = Array.from(document.querySelectorAll("#seyahat-options .option-btn"));
+      const internetSlider = document.getElementById("internet-slider");
+      const internetDisplay = document.getElementById("internet-display");
+
+      const resultMessage = document.getElementById("result-message");
+      const resultEmission = document.getElementById("result-emission");
+      const resultError = document.getElementById("result-error");
+
+      const state = {
+        transport: null,
+        food: null,
+        drink: null,
+        coffee: null,
+        media: null,
+        cop: null,
+        trivia: null,
+        bm: null,
+        internetHours: 4,
+        seyahat: null,
+      };
+
+      function showScreen(name) {
+        Object.values(screens).forEach((screen) => screen.classList.remove("active"));
+        screens[name].classList.add("active");
+        
+        if (name === "internet") {
+          toSeyahatBtn.disabled = false;
+        }
+      }
+
+      function setupSingleSelection(buttons, key, onChange) {
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            buttons.forEach((b) => b.classList.remove("selected"));
+            button.classList.add("selected");
+            state[key] = button.dataset.value;
+            onChange();
+          });
+        });
+      }
+
+      function updateTransportContinueButton() {
+        toFoodBtn.disabled = !state.transport;
+      }
+
+      function updateFoodContinueButton() {
+        toDrinkBtn.disabled = !state.food;
+      }
+
+      function updateDrinkContinueButton() {
+        toCoffeeBtn.disabled = !state.drink;
+      }
+
+      function updateCoffeeContinueButton() {
+        toMediaBtn.disabled = !state.coffee;
+      }
+
+      function updateMediaContinueButton() {
+        toCopBtn.disabled = !state.media;
+      }
+
+      function updateCopContinueButton() {
+        toTriviaBtn.disabled = !state.cop;
+      }
+
+      function updateTriviaContinueButton() {
+        toBmBtn.disabled = !state.trivia;
+      }
+
+      function updateBmContinueButton() {
+        toInternetBtn.disabled = !state.bm;
+      }
+
+      function updateSeyahatContinueButton() {
+        calculateBtn.disabled = !state.seyahat;
+      }
+
+      function updateCalculateButton() {
+        calculateBtn.disabled = !state.bm;
+      }
+
+      function resetState() {
+        state.transport = null;
+        state.food = null;
+        state.drink = null;
+        state.coffee = null;
+        state.media = null;
+
+        transportButtons.forEach((b) => b.classList.remove("selected"));
+        foodButtons.forEach((b) => b.classList.remove("selected"));
+        drinkButtons.forEach((b) => b.classList.remove("selected"));
+        coffeeButtons.forEach((b) => b.classList.remove("selected"));
+        mediaButtons.forEach((b) => b.classList.remove("selected"));
+        copButtons.forEach((b) => b.classList.remove("selected"));
+        triviaButtons.forEach((b) => b.classList.remove("selected"));
+        bmButtons.forEach((b) => b.classList.remove("selected"));
+        seyahatButtons.forEach((b) => b.classList.remove("selected"));
+
+        toFoodBtn.disabled = true;
+        toDrinkBtn.disabled = true;
+        toCoffeeBtn.disabled = true;
+        toMediaBtn.disabled = true;
+        toCopBtn.disabled = true;
+        toTriviaBtn.disabled = true;
+        toBmBtn.disabled = true;
+        toInternetBtn.disabled = true;
+        toSeyahatBtn.disabled = true;
+        calculateBtn.disabled = true;
+
+        resultMessage.textContent = "Hesaplanıyor...";
+        resultMessage.className = "result-message";
+        resultEmission.textContent = "";
+        resultError.hidden = true;
+        resultError.textContent = "";
+      }
+
+      async function calculateEmission() {
+        resultMessage.textContent = "Hesaplanıyor...";
+        resultMessage.className = "result-message";
+        resultEmission.textContent = "";
+        resultError.hidden = true;
+        resultError.textContent = "";
+
+        try {
+          const response = await fetch("http://localhost:8000/calculate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              transport: state.transport,
+              food: state.food,
+              drink: state.drink,
+              coffee: state.coffee,
+              media: state.media,
+              cop: state.cop,
+              trivia: state.trivia,
+              bm: state.bm,
+              internetHours: state.internetHours,
+              seyahat: state.seyahat,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("API yanıtı başarısız.");
+          }
+
+          const data = await response.json();
+          const emission = Number(data.emission);
+
+          if (data.is_eco_friendly) {
+            resultMessage.textContent = "🌍 Tebrikler, Doğa Dostusun!";
+            resultMessage.className = "result-message success";
+          } else {
+            resultMessage.textContent = "😔 Doğa Dostu Değilsin";
+            resultMessage.className = "result-message fail";
+          }
+
+          resultEmission.textContent = `Toplam emisyon: ${emission.toFixed(2)} kg CO2`;
+        } catch (error) {
+          resultMessage.textContent = "Sonuç alınamadı";
+          resultMessage.className = "result-message fail";
+          resultError.hidden = false;
+          resultError.textContent = "Backend bağlantısı sağlanamadı. Lütfen sunucuyu kontrol edin.";
+        }
+      }
+
+      startBtn.addEventListener("click", () => {
+        showScreen("transport");
+      });
+
+      backToWelcomeBtn.addEventListener("click", () => {
+        showScreen("welcome");
+      });
+
+      backToTransportBtn.addEventListener("click", () => {
+        showScreen("transport");
+      });
+
+      backToFoodBtn.addEventListener("click", () => {
+        showScreen("food");
+      });
+
+      backToDrinkBtn.addEventListener("click", () => {
+        showScreen("drink");
+      });
+
+      backToCoffeeBtn.addEventListener("click", () => {
+        showScreen("coffee");
+      });
+
+      backToMediaBtn.addEventListener("click", () => {
+        showScreen("media");
+      });
+
+      backToCopBtn.addEventListener("click", () => {
+        showScreen("cop");
+      });
+
+      backToTriviaBtn.addEventListener("click", () => {
+        showScreen("trivia");
+      });
+
+      backToBmBtn.addEventListener("click", () => {
+        showScreen("bm");
+      });
+
+      backToInternetBtn.addEventListener("click", () => {
+        showScreen("internet");
+      });
+
+      backToSeyahatBtn.addEventListener("click", () => {
+        showScreen("seyahat");
+      });
+
+      toFoodBtn.addEventListener("click", () => {
+        showScreen("food");
+      });
+
+      toDrinkBtn.addEventListener("click", () => {
+        showScreen("drink");
+      });
+
+      toCoffeeBtn.addEventListener("click", () => {
+        showScreen("coffee");
+      });
+
+      toMediaBtn.addEventListener("click", () => {
+        showScreen("media");
+      });
+
+      toCopBtn.addEventListener("click", () => {
+        showScreen("cop");
+      });
+
+      toTriviaBtn.addEventListener("click", () => {
+        showScreen("trivia");
+      });
+
+      toBmBtn.addEventListener("click", () => {
+        showScreen("bm");
+      });
+
+      toInternetBtn.addEventListener("click", () => {
+        showScreen("internet");
+      });
+
+      toSeyahatBtn.addEventListener("click", () => {
+        showScreen("seyahat");
+      });
+
+      internetSlider.addEventListener("input", () => {
+        state.internetHours = parseInt(internetSlider.value);
+        internetDisplay.textContent = state.internetHours + " saat";
+        toSeyahatBtn.disabled = false;
+      });
+
+      calculateBtn.addEventListener("click", async () => {
+        showScreen("result");
+        await calculateEmission();
+      });
+
+      retryBtn.addEventListener("click", () => {
+        resetState();
+        showScreen("welcome");
+      });
+
+      setupSingleSelection(transportButtons, "transport", updateTransportContinueButton);
+      setupSingleSelection(foodButtons, "food", updateFoodContinueButton);
+      setupSingleSelection(drinkButtons, "drink", updateDrinkContinueButton);
+      setupSingleSelection(coffeeButtons, "coffee", updateCoffeeContinueButton);
+      setupSingleSelection(mediaButtons, "media", updateMediaContinueButton);
+      setupSingleSelection(copButtons, "cop", updateCopContinueButton);
+      setupSingleSelection(triviaButtons, "trivia", updateTriviaContinueButton);
+      setupSingleSelection(bmButtons, "bm", updateBmContinueButton);
+      setupSingleSelection(seyahatButtons, "seyahat", updateSeyahatContinueButton);
+      resetState();
+    </script>
+  </body>
+</html>
