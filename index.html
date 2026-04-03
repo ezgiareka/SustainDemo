@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
     <title>İklim Fuarı - Seçim Oyunu</title>
     <style>
       :root {
@@ -25,7 +28,7 @@
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "DM Serif Display", serif;
         color: var(--text);
         background: #e8f5e9;
         display: flex;
@@ -33,6 +36,13 @@
         align-items: center;
         justify-content: center;
         padding: 16px;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font-family: "DM Serif Display", serif;
       }
 
       .app {
@@ -98,8 +108,13 @@
       }
 
       .carbon-counter-icon {
-        font-size: 1.875rem;
-        line-height: 1;
+        display: inline-block;
+        width: 1.875rem;
+        height: 1.875rem;
+        background-image: url("assets/images/yaprak.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
       }
 
       .carbon-counter-text {
@@ -125,7 +140,7 @@
       }
 
       h1 {
-        font-size: 1.9rem;
+        font-size: 2.7rem;
       }
 
       h2 {
@@ -143,7 +158,7 @@
       }
 
       h2::before {
-        content: "🌿";
+        content: "";
         position: absolute;
         left: 50%;
         top: 0;
@@ -153,10 +168,38 @@
         border-radius: 50%;
         border: 2px solid #a5d6a7;
         background: #ffffff;
+        background-image: url("assets/images/yaprak.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 65%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.05rem;
+      }
+
+      .welcome-badge {
+        width: 104px;
+        height: 104px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        border: 2px solid #a5d6a7;
+        background: #ffffff;
+        background-image: url("assets/images/yaprak.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 60%;
+        animation: welcome-badge-float 2.4s ease-in-out infinite;
+      }
+
+      @keyframes welcome-badge-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
       }
 
       .bm-hero {
@@ -413,6 +456,142 @@
         font-weight: 600;
       }
 
+      .result-tier-icon {
+        font-size: 3rem;
+        margin-bottom: 8px;
+      }
+
+      .result-tier-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 0 0 6px;
+      }
+
+      .result-tier-title.hero {
+        color: #1b5e20;
+      }
+
+      .result-tier-title.good {
+        color: #c2410c;
+      }
+
+      .result-tier-title.high {
+        color: #b91c1c;
+      }
+
+      .result-tier-subtitle {
+        font-size: 1rem;
+        margin: 0 0 16px;
+        color: var(--muted);
+      }
+
+      .result-total {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 20px;
+        color: var(--text);
+      }
+
+      .progress-wrap {
+        margin-bottom: 20px;
+      }
+
+      .progress-track {
+        position: relative;
+        width: 100%;
+        height: 28px;
+        border-radius: 14px;
+        background: #e0e0e0;
+        overflow: visible;
+      }
+
+      .progress-fill {
+        position: relative;
+        height: 100%;
+        border-radius: 14px;
+        background: linear-gradient(to right, #c8e6c9, #1b5e20);
+        width: 0%;
+        transition: width 1.2s ease-in-out;
+        min-width: 0;
+      }
+
+      .progress-leaf {
+        position: absolute;
+        right: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 2px solid #a5d6a7;
+        background: #fff url("assets/images/yaprak.png") no-repeat center / 65%;
+      }
+
+      .progress-label {
+        text-align: center;
+        font-size: 14px;
+        color: #555;
+        margin-top: 8px;
+      }
+
+      .breakdown-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+        text-align: left;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .breakdown-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 16px;
+        font-size: 0.95rem;
+        color: var(--text);
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .breakdown-list li:last-child {
+        border-bottom: none;
+      }
+
+      .breakdown-list li span {
+        font-weight: 700;
+        color: var(--primary-dark);
+      }
+
+      .result-tips {
+        background: #9ec7d5;
+        border: 1px solid #300ef1;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        text-align: left;
+      }
+
+      .result-tips[hidden] {
+        display: none;
+      }
+
+      .result-tips-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #f57f17;
+        margin: 0 0 12px;
+      }
+
+      .result-tips-list p {
+        margin: 0 0 8px;
+        color: #5d4037;
+        line-height: 1.45;
+      }
+
+      .result-tips-list p:last-child {
+        margin-bottom: 0;
+      }
+
       #screen-welcome {
         max-width: 1100px;
         padding: 120px 80px;
@@ -461,7 +640,8 @@
         }
 
         .carbon-counter-icon {
-          font-size: 1rem;
+          width: 1rem;
+          height: 1rem;
         }
 
         .carbon-counter-text {
@@ -482,7 +662,7 @@
   </head>
   <body>
     <aside id="carbon-counter" class="carbon-counter low" hidden>
-      <span class="carbon-counter-icon" aria-hidden="true">🌿</span>
+      <span class="carbon-counter-icon" aria-hidden="true"></span>
       <span id="carbon-counter-text" class="carbon-counter-text">Anlık: 0.00 kg CO2</span>
     </aside>
     <div class="logo-wrap">
@@ -490,8 +670,9 @@
     </div>
     <main class="app">
       <section id="screen-welcome" class="screen active">
-        <h1>Ne Kadar Yeşilsin</h1>
-        <p class="subtitle">Doğa dostu seçimler yaparak karbon ayak izinizi öğrenin.</p>
+        <div class="welcome-badge" aria-hidden="true"></div>
+        <h1>Ne Kadar Yeşilsin?</h1>
+        <p class="subtitle">"Doğa dostu seçimler yaparak karbon ayak izinizi öğrenin"</p>
         <button id="start-btn" class="action-btn" type="button">Başla</button>
       </section>
 
@@ -639,19 +820,12 @@
           </button>
           <button class="option-btn image-option" data-letter="B" data-value="sinirli" type="button">
             <span class="image-option-media">
-              <img src="assets/images/geri_donusum.jpg" alt="Atıklarımı sınırlıyorum" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-              <span class="image-fallback">Atıklarımı sınırlıyorum</span>
-              <span class="image-caption">Atıklarımı sınırlıyorum</span>
+              <img src="assets/images/geri_donusum.jpg" alt="Atıklarımı ayrıştırıyorum" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Atıklarımı ayrıştırıyorum</span>
+              <span class="image-caption">Atıklarımı ayrıştırıyorum</span>
             </span>
           </button>
-          <button class="option-btn image-option" data-letter="C" data-value="sifir" type="button">
-            <span class="image-option-media">
-              <img src="assets/images/sifir_atik.jpg" alt="Ben sıfır atıkçıyım" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-              <span class="image-fallback">Ben sıfır atıkçıyım</span>
-              <span class="image-caption">Ben sıfır atıkçıyım</span>
-            </span>
-          </button>
-          <button class="option-btn image-option" data-letter="D" data-value="kompost" type="button">
+          <button class="option-btn image-option" data-letter="C" data-value="kompost" type="button">
             <span class="image-option-media">
               <img src="assets/images/kompost.jpg" alt="Kompost yapıyorum" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
               <span class="image-fallback">Kompost yapıyorum</span>
@@ -697,12 +871,29 @@
       </section>
 
       <section id="screen-bm" class="screen">
-        <img src="assets/images/bm.png" alt="Birleşmiş Milletler" class="bm-hero" />
         <h2>Birleşmiş Milletler'in Sürdürülebilir Kalkınma Amaçları kaç tanedir?</h2>
         <div class="options" id="bm-options">
-          <button class="option-btn" data-value="5" type="button">5</button>
-          <button class="option-btn" data-value="10" type="button">10</button>
-          <button class="option-btn" data-value="17" type="button">17</button>
+          <button class="option-btn image-option" data-value="5" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/bm5.jpg" alt="5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">5</span>
+              <span class="image-caption">5</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="10" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/bm10.jpg" alt="10" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">10</span>
+              <span class="image-caption">10</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="17" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/bm.png" alt="17" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">17</span>
+              <span class="image-caption">17</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-trivia-btn" class="secondary-btn" type="button">Geri</button>
@@ -736,13 +927,24 @@
 
       <section id="screen-result" class="screen">
         <div class="result">
-          <p id="result-message" class="result-message">Hesaplanıyor...</p>
-          <p id="result-emission" class="emission"></p>
-          <p id="result-error" class="error" hidden></p>
-          <div class="nav-row">
-            <button id="back-to-seyahat-btn" class="secondary-btn" type="button">Geri</button>
-            <button id="retry-btn" class="action-btn" type="button">Yeniden Dene</button>
+          <div id="result-tier-icon" class="result-tier-icon"></div>
+          <p id="result-tier-title" class="result-tier-title"></p>
+          <p id="result-tier-subtitle" class="result-tier-subtitle"></p>
+          <p id="result-total" class="result-total"></p>
+          <div class="progress-wrap">
+            <div class="progress-track">
+              <div id="progress-fill" class="progress-fill">
+                <div class="progress-leaf"></div>
+              </div>
+            </div>
+            <div id="progress-label" class="progress-label"></div>
           </div>
+          <ul id="result-breakdown" class="breakdown-list"></ul>
+          <div id="result-tips" class="result-tips" hidden>
+            <p class="result-tips-title">💡 Sana Özel Öneriler</p>
+            <div id="result-tips-list" class="result-tips-list"></div>
+          </div>
+          <button id="retry-btn" class="action-btn" type="button">Tekrar Oyna</button>
         </div>
       </section>
     </main>
@@ -774,7 +976,6 @@
       const backToTriviaBtn = document.getElementById("back-to-trivia-btn");
       const backToBmBtn = document.getElementById("back-to-bm-btn");
       const backToInternetBtn = document.getElementById("back-to-internet-btn");
-      const backToSeyahatBtn = document.getElementById("back-to-seyahat-btn");
       const toFoodBtn = document.getElementById("to-food-btn");
       const toDrinkBtn = document.getElementById("to-drink-btn");
       const toCoffeeBtn = document.getElementById("to-coffee-btn");
@@ -799,9 +1000,15 @@
       const internetSlider = document.getElementById("internet-slider");
       const internetDisplay = document.getElementById("internet-display");
 
-      const resultMessage = document.getElementById("result-message");
-      const resultEmission = document.getElementById("result-emission");
-      const resultError = document.getElementById("result-error");
+      const resultTierIcon = document.getElementById("result-tier-icon");
+      const resultTierTitle = document.getElementById("result-tier-title");
+      const resultTierSubtitle = document.getElementById("result-tier-subtitle");
+      const resultTotal = document.getElementById("result-total");
+      const progressFill = document.getElementById("progress-fill");
+      const progressLabel = document.getElementById("progress-label");
+      const resultBreakdown = document.getElementById("result-breakdown");
+      const resultTips = document.getElementById("result-tips");
+      const resultTipsList = document.getElementById("result-tips-list");
       const carbonCounter = document.getElementById("carbon-counter");
       const carbonCounterText = document.getElementById("carbon-counter-text");
 
@@ -831,7 +1038,6 @@
         cop: {
           dikkatsiz: 2.5,
           sinirli: 1.0,
-          sifir: 0.2,
           kompost: 0,
         },
         trivia: {
@@ -1063,21 +1269,20 @@
         internetSlider.value = "4";
         internetDisplay.textContent = "4 saat";
 
-        resultMessage.textContent = "Hesaplanıyor...";
-        resultMessage.className = "result-message";
-        resultEmission.textContent = "";
-        resultError.hidden = true;
-        resultError.textContent = "";
+        resultTierIcon.textContent = "";
+        resultTierTitle.textContent = "";
+        resultTierTitle.className = "result-tier-title";
+        resultTierSubtitle.textContent = "";
+        resultTotal.textContent = "";
+        progressFill.style.width = "0%";
+        progressLabel.textContent = "";
+        resultBreakdown.innerHTML = "";
+        resultTips.hidden = true;
+        resultTipsList.innerHTML = "";
         resetCarbonCounter();
       }
 
       function calculateEmission() {
-        resultMessage.textContent = "Hesaplanıyor...";
-        resultMessage.className = "result-message";
-        resultEmission.textContent = "";
-        resultError.hidden = true;
-        resultError.textContent = "";
-
         const transportEmission = state.transport ? EMISSION_VALUES.transport[state.transport] : 0;
         const foodEmission = state.food ? EMISSION_VALUES.food[state.food] : 0;
         const drinkEmission = state.drink ? EMISSION_VALUES.drink[state.drink] : 0;
@@ -1098,27 +1303,124 @@
           travelEmission;
 
         let correctAnswerCount = 0;
-
-        if (state.trivia === "areka") {
-          correctAnswerCount += 1;
-        }
-
-        if (state.bm === "17") {
-          correctAnswerCount += 1;
-        }
+        if (state.trivia === "areka") correctAnswerCount += 1;
+        if (state.bm === "17") correctAnswerCount += 1;
 
         const totalEmission = Math.max(0, subtotal - correctAnswerCount * 0.3);
-        const isEcoFriendly = totalEmission < 10.0;
 
-        if (isEcoFriendly) {
-          resultMessage.textContent = "🌍 Tebrikler, Doğa Dostusun!";
-          resultMessage.className = "result-message success";
+        let icon, title, subtitle, titleClass;
+        if (totalEmission < 4) {
+          icon = "🌍";
+          title = "Sürdürülebilirlik Kahramanısın!";
+          subtitle = "Gezegenimiz seninle gurur duyuyor.";
+          titleClass = "result-tier-title hero";
+        } else if (totalEmission <= 10) {
+          icon = "🌱";
+          title = "İyi Gidiyorsun, Ama Daha İyisi Mümkün!";
+          subtitle = "Küçük değişiklikler büyük fark yaratır.";
+          titleClass = "result-tier-title good";
         } else {
-          resultMessage.textContent = "😔 Doğa Dostu Değilsin";
-          resultMessage.className = "result-message fail";
+          icon = "🔥";
+          title = "Karbon Ayak İzin Yüksek";
+          subtitle = "Bugün bir adım atmak için geç değil.";
+          titleClass = "result-tier-title high";
         }
 
-        resultEmission.textContent = `Toplam emisyon: ${totalEmission.toFixed(2)} kg CO2`;
+        resultTierIcon.textContent = icon;
+        resultTierTitle.textContent = title;
+        resultTierTitle.className = titleClass;
+        resultTierSubtitle.textContent = subtitle;
+        resultTotal.textContent = `Toplam Karbon Etkisi: ${totalEmission.toFixed(2)} kg CO2`;
+
+        const score = Math.max(0, Math.min(100, Math.round((1 - totalEmission / 20) * 100)));
+        progressLabel.textContent = `Doğa Dostu Skoru: %${score}`;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            progressFill.style.width = score + "%";
+          });
+        });
+
+        const breakdown = [
+          ["Ulaşım", transportEmission],
+          ["Kahve", materialEmission],
+          ["Su", drinkEmission],
+          ["Yemek", foodEmission],
+          ["Paylaşım", mediaEmission],
+          ["Çöp", copEmission],
+          ["İnternet", internetEmission],
+          ["Seyahat", travelEmission],
+        ];
+        resultBreakdown.innerHTML = breakdown
+          .map(([label, val]) => `<li>${label}: <span>${val.toFixed(2)} kg</span></li>`)
+          .join("");
+
+        const transportValue =
+          state.transport === "metro"
+            ? "toplu_tasima"
+            : state.transport === "yuruyerek_bisiklet"
+            ? "bisiklet"
+            : state.transport;
+        const coffeeValue =
+          state.coffee === "Tek Kullanimlik"
+            ? "karton_bardak"
+            : state.coffee === "Termos"
+            ? "termos"
+            : state.coffee;
+        const drinkValue = state.drink === "evet" ? "su_sisesi" : state.drink;
+        const foodValue = state.food;
+        const mediaValue =
+          state.media === "eglence_icin"
+            ? "eglence"
+            : state.media === "hayir"
+            ? "paylasmadim"
+            : state.media;
+        const copValue = state.cop;
+        const internetHours = typeof state.internetHours === "number" ? state.internetHours : 0;
+        const travelValue = state.seyahat;
+
+        const tips = [];
+        const addTip = (text) => {
+          tips.push(text);
+        };
+
+        if (transportValue === "araba") addTip("Tek başına araba kullanmak yerine toplu taşıma veya bisiklet tercih edebilirsin.");
+        if (transportValue === "toplu_tasima") addTip("Toplu taşıma kullandığın için harika! Kısa mesafelerde yürümeyi de deneyebilirsin.");
+        if (transportValue === "bisiklet") addTip("Bisiklet seçimin mükemmel! Bu alışkanlığı korumaya devam et.");
+
+        if (coffeeValue === "karton_bardak") addTip("Tek kullanımlık bardak yerine kendi termosunu yanında taşıyabilirsin.");
+        if (coffeeValue === "termos") addTip("Termos kullanman çok bilinçli bir tercih, aferin!");
+
+        if (drinkValue === "su_sisesi") addTip("Şişelenmiş su yerine filtreli su ve tekrar kullanılabilir matara kullanmayı düşünebilirsin.");
+
+        if (foodValue === "etli") addTip("Haftada 1-2 gün etsiz beslenmeyi deneyebilirsin, büyük fark yaratır.");
+        if (foodValue === "vegan") addTip("Bitki bazlı beslenmen karbon ayak izini önemli ölçüde azaltıyor!");
+
+        if (mediaValue === "eglence" || mediaValue === "paylasmadim") addTip("Sürdürülebilirlik içerikleri paylaşarak çevrendeki insanları da bilinçlendirebilirsin.");
+
+        if (copValue === "dikkatsiz") addTip("Atıklarını geri dönüşüm kutularına atmayı alışkanlık haline getirebilirsin.");
+        if (copValue === "sinirli") addTip("Sıfır atık hedefine ulaşmak için alışverişte ambalajsız ürünleri tercih edebilirsin.");
+        if (copValue === "kompost") addTip("Kompost yapman harika! Kompostunu bir topluluk bahçesiyle paylaşmayı düşünebilirsin.");
+
+        if (internetHours >= 7) addTip("Günlük internet kullanımını azaltmak hem karbon izini düşürür hem de sana zaman kazandırır.");
+
+        if (travelValue === "cok") addTip("Uzun mesafe seyahatlerde uçak yerine tren alternatiflerini araştırabilirsin.");
+        if (travelValue === "orta") addTip("Seyahat ettiğinde karbon dengeleme programlarına katılmayı düşünebilirsin.");
+
+        if (totalEmission < 3) addTip("Sen zaten çok bilinçli bir bireysin. Çevreni de bu konuda teşvik etmeyi unutma! 🌍");
+
+        for (let i = tips.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [tips[i], tips[j]] = [tips[j], tips[i]];
+        }
+
+        const shownTips = tips.slice(0, 4);
+        if (shownTips.length === 0) {
+          resultTips.hidden = true;
+          resultTipsList.innerHTML = "";
+        } else {
+          resultTips.hidden = false;
+          resultTipsList.innerHTML = shownTips.map((tip) => `<p>✅ ${tip}</p>`).join("");
+        }
       }
 
       startBtn.addEventListener("click", () => {
@@ -1163,10 +1465,6 @@
 
       backToInternetBtn.addEventListener("click", () => {
         showScreen("internet");
-      });
-
-      backToSeyahatBtn.addEventListener("click", () => {
-        showScreen("seyahat");
       });
 
       toFoodBtn.addEventListener("click", () => {
