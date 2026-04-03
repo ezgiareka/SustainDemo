@@ -27,8 +27,7 @@
         min-height: 100vh;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         color: var(--text);
-        background: radial-gradient(circle at 10% 20%, var(--bg-2) 0%, var(--bg-1) 55%),
-          linear-gradient(135deg, #f0fdf4, #dcfce7);
+        background: #e8f5e9;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -59,6 +58,56 @@
         height: auto;
       }
 
+      .carbon-counter {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        min-width: 285px;
+        padding: 15px 21px;
+        border: 1px solid #86efac;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 10px 24px rgba(20, 83, 45, 0.12);
+        color: #15803d;
+        transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.25s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .carbon-counter[hidden] {
+        display: none;
+      }
+
+      .carbon-counter.low {
+        color: #15803d;
+        border-color: #86efac;
+      }
+
+      .carbon-counter.medium {
+        color: #c2410c;
+        border-color: #fdba74;
+      }
+
+      .carbon-counter.high {
+        color: #b91c1c;
+        border-color: #fca5a5;
+        box-shadow: 0 10px 24px rgba(185, 28, 28, 0.14);
+      }
+
+      .carbon-counter-icon {
+        font-size: 1.875rem;
+        line-height: 1;
+      }
+
+      .carbon-counter-text {
+        font-size: 1.44rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
       .screen {
         display: none;
         padding: 26px 18px;
@@ -80,7 +129,45 @@
       }
 
       h2 {
-        font-size: 1.45rem;
+        position: relative;
+        max-width: 100%;
+        margin: 28px auto 18px;
+        padding: 16px 18px;
+        font-size: 1.22rem;
+        font-weight: 800;
+        color: #2e3d33;
+        background: #ffffff;
+        border: 2px solid #a5d6a7;
+        border-radius: 18px;
+        box-shadow: 0 8px 20px rgba(56, 142, 60, 0.12);
+      }
+
+      h2::before {
+        content: "🌿";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%, -60%);
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 2px solid #a5d6a7;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+      }
+
+      .bm-hero {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+        border-radius: 50%;
+        margin: 0 auto 16px;
+        display: block;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: #ffffff;
       }
 
       .subtitle {
@@ -91,31 +178,114 @@
 
       .options {
         display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
         margin-bottom: 20px;
       }
 
+      .options .option-btn:nth-child(3):last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: calc(50% - 6px);
+      }
+
       .option-btn {
         width: 100%;
-        border: 1px solid #bbf7d0;
-        background: #f0fdf4;
-        color: #166534;
+        min-height: 190px;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        position: relative;
+        border: 2px solid #a5d6a7;
+        background: #ffffff;
+        color: #37474f;
         border-radius: 12px;
-        padding: 14px;
-        font-size: 1rem;
-        font-weight: 600;
+        padding: 34px 24px;
+        font-size: 1.55rem;
+        line-height: 1.35;
+        font-weight: 700;
         cursor: pointer;
         transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
       }
 
       .option-btn:hover {
         transform: translateY(-1px);
+        background: #f1f8e9;
       }
 
       .option-btn.selected {
-        background: var(--primary);
+        background: #c8e6c9;
+        color: #1b5e20;
+        border-color: #388e3c;
+      }
+
+      .image-option {
+        min-height: 190px;
+        height: 190px;
+        padding: 0;
+        border-radius: 12px;
+        border: 2px solid #a5d6a7;
+        overflow: hidden;
+      }
+
+      .image-option::before {
+        content: none;
+      }
+
+      .image-option:hover {
+        background: #ffffff;
+      }
+
+      .image-option-media {
+        position: relative;
+        flex: 1;
+        align-self: stretch;
+        height: 100%;
+      }
+
+      .image-option-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .image-fallback {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        background: #cfd8dc;
+        color: #37474f;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .image-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 6px 8px;
+        background: rgba(0, 0, 0, 0.55);
         color: #ffffff;
-        border-color: var(--primary-dark);
+        font-size: 13px;
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      .image-option.selected {
+        border: 3px solid #388e3c;
+      }
+
+      .image-option.selected .image-option-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(56, 142, 60, 0.2);
       }
 
       .action-btn {
@@ -243,6 +413,12 @@
         font-weight: 600;
       }
 
+      #screen-welcome {
+        max-width: 1100px;
+        padding: 120px 80px;
+        margin: 0 auto;
+      }
+
       @media (max-width: 480px) {
         .screen {
           padding: 22px 14px;
@@ -253,18 +429,62 @@
         }
 
         h2 {
-          font-size: 1.3rem;
+          font-size: 1.06rem;
+        }
+
+        .bm-hero {
+          width: 140px;
+          height: 140px;
         }
 
         .option-btn,
         .action-btn {
-          padding: 13px;
-          font-size: 0.98rem;
+          padding: 18px;
+          font-size: 1.14rem;
+        }
+
+        .option-btn {
+          min-height: 150px;
+          padding: 26px 18px;
+          font-size: 1.2rem;
+        }
+
+        .options .option-btn:nth-child(3):last-child {
+          width: 75%;
+        }
+
+        .carbon-counter {
+          min-width: 150px;
+          padding: 9px 11px;
+          gap: 6px;
+          border-radius: 10px;
+        }
+
+        .carbon-counter-icon {
+          font-size: 1rem;
+        }
+
+        .carbon-counter-text {
+          font-size: 0.675rem;
+        }
+
+        .image-option {
+          min-height: 150px;
+          height: 150px;
+        }
+
+        .image-caption {
+          font-size: 12px;
+          padding: 5px 7px;
         }
       }
     </style>
   </head>
   <body>
+    <aside id="carbon-counter" class="carbon-counter low" hidden>
+      <span class="carbon-counter-icon" aria-hidden="true">🌿</span>
+      <span id="carbon-counter-text" class="carbon-counter-text">Anlık: 0.00 kg CO2</span>
+    </aside>
     <div class="logo-wrap">
       <img src="https://www.areka.ai/img/ArekaTopLogo.png" alt="Areka Logo" class="logo" />
     </div>
@@ -278,9 +498,27 @@
       <section id="screen-transport" class="screen">
         <h2>Festivale Nasıl Geldin?</h2>
         <div class="options" id="transport-options">
-          <button class="option-btn" data-value="metro" type="button">Metro/Otobüs 🚇</button>
-          <button class="option-btn" data-value="araba" type="button">Araba 🚗</button>
-          <button class="option-btn" data-value="yuruyerek_bisiklet" type="button">Yürüyerek/Bisiklet 🚶‍♀️🚲</button>
+          <button class="option-btn image-option" data-letter="A" data-value="metro" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/otobus.jpg" alt="Toplu Taşıma / Metro" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Toplu Taşıma / Metro</span>
+              <span class="image-caption">Toplu Taşıma / Metro</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="B" data-value="araba" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/araba.jpg" alt="Tek Kişilik Arabayla" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Tek Kişilik Arabayla</span>
+              <span class="image-caption">Tek Kişilik Arabayla</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="C" data-value="yuruyerek_bisiklet" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/bisiklet.jpg" alt="Yürüyerek / Bisiklet" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Yürüyerek / Bisiklet</span>
+              <span class="image-caption">Yürüyerek / Bisiklet</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-welcome-btn" class="secondary-btn" type="button">Geri</button>
@@ -291,8 +529,20 @@
       <section id="screen-food" class="screen">
         <h2>Yemek Tercihiniz?</h2>
         <div class="options" id="food-options">
-          <button class="option-btn" data-value="etli" type="button">Etli Yemek 🥩</button>
-          <button class="option-btn" data-value="vegan" type="button">Vegan 🌱</button>
+          <button class="option-btn image-option" data-letter="A" data-value="etli" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/etli_yemek.jpg" alt="Et Ağırlıklı" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Et Ağırlıklı</span>
+              <span class="image-caption">Et Ağırlıklı</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="B" data-value="vegan" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/vegan.jpg" alt="Sebze Ağırlıklı" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Sebze Ağırlıklı</span>
+              <span class="image-caption">Sebze Ağırlıklı</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-transport-btn" class="secondary-btn" type="button">Geri</button>
@@ -303,8 +553,20 @@
       <section id="screen-drink" class="screen">
         <h2>Şişelenmiş Su İçiyor Musunuz?</h2>
         <div class="options" id="drink-options">
-          <button class="option-btn" data-value="evet" type="button">Evet 💧</button>
-          <button class="option-btn" data-value="hayir" type="button">Hayır 🚫</button>
+          <button class="option-btn image-option" data-letter="A" data-value="evet" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/su_sisesi.jpg" alt="Evet" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Evet</span>
+              <span class="image-caption">Evet</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="B" data-value="hayir" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/su_matarasi.jpg" alt="Hayır" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Hayır</span>
+              <span class="image-caption">Hayır</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-food-btn" class="secondary-btn" type="button">Geri</button>
@@ -314,8 +576,20 @@
       <section id="screen-coffee" class="screen">
         <h2>Kahve Tercihiniz?</h2>
         <div class="options" id="coffee-options">
-          <button class="option-btn" data-value="Termos" type="button">Termos ☕</button>
-          <button class="option-btn" data-value="Tek Kullanimlik" type="button">Tek Kullanımlık ☕</button>
+          <button class="option-btn image-option" data-letter="A" data-value="Termos" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/termos.jpg" alt="Termos / Tekrar Kullanılabilir" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Termos / Tekrar Kullanılabilir</span>
+              <span class="image-caption">Termos / Tekrar Kullanılabilir</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="B" data-value="Tek Kullanimlik" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/karton_bardak.jpg" alt="Tek Kullanımlık + Kapak" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Tek Kullanımlık + Kapak</span>
+              <span class="image-caption">Tek Kullanımlık + Kapak</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-drink-btn" class="secondary-btn" type="button">Geri</button>
@@ -325,9 +599,27 @@
       <section id="screen-media" class="screen">
         <h2>Sosyal Medya Paylaşımı Yaptın Mı?</h2>
         <div class="options" id="media-options">
-          <button class="option-btn" data-value="evet" type="button">Sürdürülebilirlikle ilgili paylaştım.📱</button>
-          <button class="option-btn" data-value="eglence_icin" type="button">Sadece eğlence için paylaştım.🎉</button>
-          <button class="option-btn" data-value="hayir" type="button">Hayır, paylaşmadım.🚫</button>
+          <button class="option-btn image-option" data-letter="A" data-value="evet" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/sosyal_medya.jpg" alt="Sürdürülebilirlikle ilgili paylaştım" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Sürdürülebilirlikle ilgili paylaştım</span>
+              <span class="image-caption">Sürdürülebilirlikle ilgili paylaştım</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="B" data-value="eglence_icin" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/eglence_paylasimi.jpg" alt="Sadece eğlence" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Sadece eğlence</span>
+              <span class="image-caption">Sadece eğlence</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="C" data-value="hayir" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/paylasim_yapmadim.jpg" alt="Paylaşmadım" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Paylaşmadım</span>
+              <span class="image-caption">Paylaşmadım</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-coffee-btn" class="secondary-btn" type="button">Geri</button>
@@ -338,10 +630,34 @@
       <section id="screen-cop" class="screen">
         <h2>Çöpünü ne yaparsın?</h2>
         <div class="options" id="cop-options">
-          <button class="option-btn" data-value="dikkatsiz" type="button">Dikkat etmeden atıyorum 🗑️</button>
-          <button class="option-btn" data-value="sinirli" type="button">Atıklarımı sınırlıyorum ♻️</button>
-          <button class="option-btn" data-value="sifir" type="button">Ben sıfır atıkçıyım 🌿</button>
-          <button class="option-btn" data-value="kompost" type="button">Kompost yapıyorum 🌱</button>
+          <button class="option-btn image-option" data-letter="A" data-value="dikkatsiz" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/yere_cop_atma.jpg" alt="Dikkat etmeden atıyorum" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Dikkat etmeden atıyorum</span>
+              <span class="image-caption">Dikkat etmeden atıyorum</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="B" data-value="sinirli" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/geri_donusum.jpg" alt="Atıklarımı sınırlıyorum" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Atıklarımı sınırlıyorum</span>
+              <span class="image-caption">Atıklarımı sınırlıyorum</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="C" data-value="sifir" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/sifir_atik.jpg" alt="Ben sıfır atıkçıyım" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Ben sıfır atıkçıyım</span>
+              <span class="image-caption">Ben sıfır atıkçıyım</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="D" data-value="kompost" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/kompost.jpg" alt="Kompost yapıyorum" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Kompost yapıyorum</span>
+              <span class="image-caption">Kompost yapıyorum</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-media-btn" class="secondary-btn" type="button">Geri</button>
@@ -352,9 +668,27 @@
       <section id="screen-trivia" class="screen">
         <h2>Kapalı bir ortamda hangisi daha fazla hava temizler?</h2>
         <div class="options" id="trivia-options">
-          <button class="option-btn" data-value="areka" type="button">Areka Bitkisi 🌴</button>
-          <button class="option-btn" data-value="sarmasik" type="button">Sarmaşık 🍃</button>
-          <button class="option-btn" data-value="kaktus" type="button">Kaktüs 🌵</button>
+          <button class="option-btn image-option" data-letter="A" data-value="areka" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/areka.jpg" alt="Areka Bitkisi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Areka Bitkisi</span>
+              <span class="image-caption">Areka Bitkisi</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="B" data-value="sarmasik" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/sarmasik.jpg" alt="Sarmaşık" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Sarmaşık</span>
+              <span class="image-caption">Sarmaşık</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="C" data-value="kaktus" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/kaktus.jpg" alt="Kaktüs" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Kaktüs</span>
+              <span class="image-caption">Kaktüs</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-cop-btn" class="secondary-btn" type="button">Geri</button>
@@ -363,6 +697,7 @@
       </section>
 
       <section id="screen-bm" class="screen">
+        <img src="assets/images/bm.png" alt="Birleşmiş Milletler" class="bm-hero" />
         <h2>Birleşmiş Milletler'in Sürdürülebilir Kalkınma Amaçları kaç tanedir?</h2>
         <div class="options" id="bm-options">
           <button class="option-btn" data-value="5" type="button">5</button>
@@ -374,8 +709,8 @@
           <button id="to-internet-btn" class="action-btn" type="button" disabled>Devam Et</button>
         </div>
       </section>
-
-      <section id="screen-internet" class="screen">
+      
+      <section id="screen-internet" class="screen"> 
         <h2>Günde kaç saat internet kullanıyorsunuz?</h2>
         <input type="range" id="internet-slider" min="0" max="16" step="1" value="4" />
         <div class="slider-display" id="internet-display">4 saat</div>
@@ -467,6 +802,55 @@
       const resultMessage = document.getElementById("result-message");
       const resultEmission = document.getElementById("result-emission");
       const resultError = document.getElementById("result-error");
+      const carbonCounter = document.getElementById("carbon-counter");
+      const carbonCounterText = document.getElementById("carbon-counter-text");
+
+      const EMISSION_VALUES = {
+        transport: {
+          araba: 23.3,
+          metro: 4.9,
+          yuruyerek_bisiklet: 0,
+        },
+        food: {
+          etli: 7.1,
+          vegan: 3.8,
+        },
+        drink: {
+          evet: 0.32,
+          hayir: 0,
+        },
+        coffee: {
+          Termos: 0.1,
+          Tek_Kullanimlik: 0.5,
+        },
+        media: {
+          evet: 0.2,
+          eglence_icin: 0.5,
+          hayir: 0,
+        },
+        cop: {
+          dikkatsiz: 2.5,
+          sinirli: 1.0,
+          sifir: 0.2,
+          kompost: 0,
+        },
+        trivia: {
+          areka: 0,
+          sarmasik: 0,
+          kaktus: 0,
+        },
+        bm: {
+          5: 0,
+          10: 0,
+          17: 0,
+        },
+        seyahat: {
+          hic: 0,
+          az: 1.5,
+          orta: 4.0,
+          cok: 9.0,
+        },
+      };
 
       const state = {
         transport: null,
@@ -477,13 +861,114 @@
         cop: null,
         trivia: null,
         bm: null,
-        internetHours: 4,
+        internetHours: null,
         seyahat: null,
       };
+
+      function getInternetEmission(hours) {
+        if (hours <= 2) {
+          return 0.1;
+        }
+
+        if (hours <= 6) {
+          return 0.3;
+        }
+
+        if (hours <= 10) {
+          return 0.7;
+        }
+
+        return 1.2;
+      }
+
+      function getRunningEmissionTotal() {
+        let total = 0;
+
+        if (state.transport) {
+          total += EMISSION_VALUES.transport[state.transport];
+        }
+
+        if (state.food) {
+          total += EMISSION_VALUES.food[state.food];
+        }
+
+        if (state.drink) {
+          total += EMISSION_VALUES.drink[state.drink];
+        }
+
+        if (state.coffee) {
+          total += EMISSION_VALUES.coffee[state.coffee.replace(/\s+/g, "_")];
+        }
+
+        if (state.media) {
+          total += EMISSION_VALUES.media[state.media];
+        }
+
+        if (state.cop) {
+          total += EMISSION_VALUES.cop[state.cop];
+        }
+
+        if (state.trivia) {
+          total += EMISSION_VALUES.trivia[state.trivia];
+        }
+
+        if (state.bm) {
+          total += EMISSION_VALUES.bm[state.bm];
+        }
+
+        if (typeof state.internetHours === "number") {
+          total += getInternetEmission(state.internetHours);
+        }
+
+        if (state.seyahat) {
+          total += EMISSION_VALUES.seyahat[state.seyahat];
+        }
+
+        return total;
+      }
+
+      function setCounterTone(total) {
+        carbonCounter.classList.remove("low", "medium", "high");
+
+        if (total < 10) {
+          carbonCounter.classList.add("low");
+          return;
+        }
+
+        if (total <= 17) {
+          carbonCounter.classList.add("medium");
+          return;
+        }
+
+        carbonCounter.classList.add("high");
+      }
+
+      function updateCarbonCounter() {
+        const total = getRunningEmissionTotal();
+        carbonCounterText.textContent = `Anlık: ${total.toFixed(2)} kg CO2`;
+        setCounterTone(total);
+      }
+
+      function syncCarbonCounterVisibility(activeScreen) {
+        const shouldShow = activeScreen !== "welcome" && activeScreen !== "result";
+        carbonCounter.hidden = !shouldShow;
+
+        if (shouldShow) {
+          updateCarbonCounter();
+        }
+      }
+
+      function resetCarbonCounter() {
+        carbonCounterText.textContent = "Anlık: 0.00 kg CO2";
+        carbonCounter.classList.remove("medium", "high");
+        carbonCounter.classList.add("low");
+        carbonCounter.hidden = true;
+      }
 
       function showScreen(name) {
         Object.values(screens).forEach((screen) => screen.classList.remove("active"));
         screens[name].classList.add("active");
+        syncCarbonCounterVisibility(name);
         
         if (name === "internet") {
           toSeyahatBtn.disabled = false;
@@ -497,6 +982,7 @@
             button.classList.add("selected");
             state[key] = button.dataset.value;
             onChange();
+            updateCarbonCounter();
           });
         });
       }
@@ -547,6 +1033,11 @@
         state.drink = null;
         state.coffee = null;
         state.media = null;
+        state.cop = null;
+        state.trivia = null;
+        state.bm = null;
+        state.internetHours = null;
+        state.seyahat = null;
 
         transportButtons.forEach((b) => b.classList.remove("selected"));
         foodButtons.forEach((b) => b.classList.remove("selected"));
@@ -569,62 +1060,65 @@
         toSeyahatBtn.disabled = true;
         calculateBtn.disabled = true;
 
+        internetSlider.value = "4";
+        internetDisplay.textContent = "4 saat";
+
         resultMessage.textContent = "Hesaplanıyor...";
         resultMessage.className = "result-message";
         resultEmission.textContent = "";
         resultError.hidden = true;
         resultError.textContent = "";
+        resetCarbonCounter();
       }
 
-      async function calculateEmission() {
+      function calculateEmission() {
         resultMessage.textContent = "Hesaplanıyor...";
         resultMessage.className = "result-message";
         resultEmission.textContent = "";
         resultError.hidden = true;
         resultError.textContent = "";
 
-        try {
-          const response = await fetch("http://localhost:8000/calculate", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              transport: state.transport,
-              food: state.food,
-              drink: state.drink,
-              coffee: state.coffee,
-              media: state.media,
-              cop: state.cop,
-              trivia: state.trivia,
-              bm: state.bm,
-              internetHours: state.internetHours,
-              seyahat: state.seyahat,
-            }),
-          });
+        const transportEmission = state.transport ? EMISSION_VALUES.transport[state.transport] : 0;
+        const foodEmission = state.food ? EMISSION_VALUES.food[state.food] : 0;
+        const drinkEmission = state.drink ? EMISSION_VALUES.drink[state.drink] : 0;
+        const materialEmission = state.coffee ? EMISSION_VALUES.coffee[state.coffee.replace(/\s+/g, "_")] : 0;
+        const mediaEmission = state.media ? EMISSION_VALUES.media[state.media] : 0;
+        const copEmission = state.cop ? EMISSION_VALUES.cop[state.cop] : 0;
+        const internetEmission = typeof state.internetHours === "number" ? getInternetEmission(state.internetHours) : 0;
+        const travelEmission = state.seyahat ? EMISSION_VALUES.seyahat[state.seyahat] : 0;
 
-          if (!response.ok) {
-            throw new Error("API yanıtı başarısız.");
-          }
+        const subtotal =
+          transportEmission +
+          foodEmission +
+          drinkEmission +
+          materialEmission +
+          mediaEmission +
+          copEmission +
+          internetEmission +
+          travelEmission;
 
-          const data = await response.json();
-          const emission = Number(data.emission);
+        let correctAnswerCount = 0;
 
-          if (data.is_eco_friendly) {
-            resultMessage.textContent = "🌍 Tebrikler, Doğa Dostusun!";
-            resultMessage.className = "result-message success";
-          } else {
-            resultMessage.textContent = "😔 Doğa Dostu Değilsin";
-            resultMessage.className = "result-message fail";
-          }
-
-          resultEmission.textContent = `Toplam emisyon: ${emission.toFixed(2)} kg CO2`;
-        } catch (error) {
-          resultMessage.textContent = "Sonuç alınamadı";
-          resultMessage.className = "result-message fail";
-          resultError.hidden = false;
-          resultError.textContent = "Backend bağlantısı sağlanamadı. Lütfen sunucuyu kontrol edin.";
+        if (state.trivia === "areka") {
+          correctAnswerCount += 1;
         }
+
+        if (state.bm === "17") {
+          correctAnswerCount += 1;
+        }
+
+        const totalEmission = Math.max(0, subtotal - correctAnswerCount * 0.3);
+        const isEcoFriendly = totalEmission < 10.0;
+
+        if (isEcoFriendly) {
+          resultMessage.textContent = "🌍 Tebrikler, Doğa Dostusun!";
+          resultMessage.className = "result-message success";
+        } else {
+          resultMessage.textContent = "😔 Doğa Dostu Değilsin";
+          resultMessage.className = "result-message fail";
+        }
+
+        resultEmission.textContent = `Toplam emisyon: ${totalEmission.toFixed(2)} kg CO2`;
       }
 
       startBtn.addEventListener("click", () => {
@@ -708,18 +1202,24 @@
       });
 
       toSeyahatBtn.addEventListener("click", () => {
+        if (state.internetHours === null) {
+          state.internetHours = parseInt(internetSlider.value, 10);
+          updateCarbonCounter();
+        }
+
         showScreen("seyahat");
       });
 
       internetSlider.addEventListener("input", () => {
-        state.internetHours = parseInt(internetSlider.value);
+        state.internetHours = parseInt(internetSlider.value, 10);
         internetDisplay.textContent = state.internetHours + " saat";
         toSeyahatBtn.disabled = false;
+        updateCarbonCounter();
       });
 
-      calculateBtn.addEventListener("click", async () => {
+      calculateBtn.addEventListener("click", () => {
         showScreen("result");
-        await calculateEmission();
+        calculateEmission();
       });
 
       retryBtn.addEventListener("click", () => {
