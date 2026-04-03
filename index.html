@@ -534,34 +534,6 @@
         margin-top: 8px;
       }
 
-      .breakdown-list {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 24px;
-        text-align: left;
-        border: 1px solid #e0e0e0;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-
-      .breakdown-list li {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 16px;
-        font-size: 0.95rem;
-        color: var(--text);
-        border-bottom: 1px solid #f0f0f0;
-      }
-
-      .breakdown-list li:last-child {
-        border-bottom: none;
-      }
-
-      .breakdown-list li span {
-        font-weight: 700;
-        color: var(--primary-dark);
-      }
-
       .result-tips {
         background: #9ec7d5;
         border: 1px solid #300ef1;
@@ -939,7 +911,6 @@
             </div>
             <div id="progress-label" class="progress-label"></div>
           </div>
-          <ul id="result-breakdown" class="breakdown-list"></ul>
           <div id="result-tips" class="result-tips" hidden>
             <p class="result-tips-title">💡 Sana Özel Öneriler</p>
             <div id="result-tips-list" class="result-tips-list"></div>
@@ -1006,7 +977,6 @@
       const resultTotal = document.getElementById("result-total");
       const progressFill = document.getElementById("progress-fill");
       const progressLabel = document.getElementById("progress-label");
-      const resultBreakdown = document.getElementById("result-breakdown");
       const resultTips = document.getElementById("result-tips");
       const resultTipsList = document.getElementById("result-tips-list");
       const carbonCounter = document.getElementById("carbon-counter");
@@ -1276,7 +1246,6 @@
         resultTotal.textContent = "";
         progressFill.style.width = "0%";
         progressLabel.textContent = "";
-        resultBreakdown.innerHTML = "";
         resultTips.hidden = true;
         resultTipsList.innerHTML = "";
         resetCarbonCounter();
@@ -1339,20 +1308,6 @@
             progressFill.style.width = score + "%";
           });
         });
-
-        const breakdown = [
-          ["Ulaşım", transportEmission],
-          ["Kahve", materialEmission],
-          ["Su", drinkEmission],
-          ["Yemek", foodEmission],
-          ["Paylaşım", mediaEmission],
-          ["Çöp", copEmission],
-          ["İnternet", internetEmission],
-          ["Seyahat", travelEmission],
-        ];
-        resultBreakdown.innerHTML = breakdown
-          .map(([label, val]) => `<li>${label}: <span>${val.toFixed(2)} kg</span></li>`)
-          .join("");
 
         const transportValue =
           state.transport === "metro"
