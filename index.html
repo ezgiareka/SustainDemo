@@ -720,6 +720,13 @@
               <span class="image-caption">Hayır</span>
             </span>
           </button>
+          <button class="option-btn image-option" data-letter="C" data-value="kupada" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/kupa.jpg" alt="Kupada İçiyorum" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Kupada İçiyorum</span>
+              <span class="image-caption">Kupada İçiyorum</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-food-btn" class="secondary-btn" type="button">Geri</button>
@@ -741,6 +748,13 @@
               <img src="assets/images/karton_bardak.jpg" alt="Tek Kullanımlık + Kapak" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
               <span class="image-fallback">Tek Kullanımlık + Kapak</span>
               <span class="image-caption">Tek Kullanımlık + Kapak</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-letter="C" data-value="Fincan" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/kahve_kupa.jpg" alt="Fincan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Fincan</span>
+              <span class="image-caption">Fincan</span>
             </span>
           </button>
         </div>
@@ -852,16 +866,16 @@
               <span class="image-caption">5</span>
             </span>
           </button>
-          <button class="option-btn image-option" data-value="10" type="button">
+          <button class="option-btn image-option" data-value="9" type="button">
             <span class="image-option-media">
-              <img src="assets/images/bm10.jpg" alt="10" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-              <span class="image-fallback">10</span>
-              <span class="image-caption">10</span>
+              <img src="assets/images/bm9.jpg" alt="9" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">9</span>
+              <span class="image-caption">9</span>
             </span>
           </button>
           <button class="option-btn image-option" data-value="17" type="button">
             <span class="image-option-media">
-              <img src="assets/images/bm.png" alt="17" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <img src="assets/images/bm2.png" alt="17" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
               <span class="image-fallback">17</span>
               <span class="image-caption">17</span>
             </span>
@@ -889,11 +903,103 @@
           <button class="option-btn" data-value="hic" type="button">Hiç uçmadım ✈️❌</button>
           <button class="option-btn" data-value="az" type="button">1-2 kez 🌍</button>
           <button class="option-btn" data-value="orta" type="button">3-5 kez ✈️</button>
-          <button class="option-btn" data-value="cok" type="button">6+ kez 🚀</button>
         </div>
         <div class="nav-row">
           <button id="back-to-internet-btn" class="secondary-btn" type="button">Geri</button>
           <button id="calculate-btn" class="action-btn" type="button" disabled>Sonucu Gör</button>
+        </div>
+      </section>
+
+      <section id="screen-heating" class="screen">
+        <h2>Evinde kullandığın ısıtma sistemi nedir?</h2>
+        <div id="heating-options" class="options">
+          <button class="option-btn image-option" data-value="dogalgaz" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/kombi.jpg" alt="Doğalgaz (Kombi / Merkezi Sistem)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Doğalgaz (Kombi / Merkezi Sistem) </span>
+              <span class="image-caption">Doğalgaz (Kombi / Merkezi Sistem) </span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="elektrik" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/klima.jpg" alt="Elektrikli Isıtıcı / Klima" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Elektrikli Isıtıcı / Klima </span>
+              <span class="image-caption">Elektrikli Isıtıcı / Klima </span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="soba" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/soba.jpg" alt="Soba (Kömür / Odun)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Soba (Kömür / Odun) </span>
+              <span class="image-caption">Soba (Kömür / Odun) </span>
+            </span>
+          </button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-seyahat-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-water-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-water" class="screen">
+        <h2>Kullandığın suyun ana kaynağı nedir?</h2>
+        <div id="water-options" class="options">
+          <button class="option-btn image-option" data-value="aritma" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/aritma.jpg" alt="Arıtma Suyu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Arıtma Suyu </span>
+              <span class="image-caption">Arıtma Suyu </span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="kaynak" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/kaynak.jpg" alt="Kaynak Suyu (Şişe)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Kaynak Suyu (Şişe) </span>
+              <span class="image-caption">Kaynak Suyu (Şişe) </span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="sebeke" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/sebeke.jpg" alt="Şebeke Suyu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Şebeke Suyu </span>
+              <span class="image-caption">Şebeke Suyu </span>
+            </span>
+          </button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-heating-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-energy-btn" class="action-btn" type="button" disabled>Devam Et</button>
+        </div>
+      </section>
+
+      <section id="screen-energy" class="screen">
+        <h2>Kullandığın enerjinin kaynağı nedir?</h2>
+        <div id="energy-options" class="options">
+          <button class="option-btn image-option" data-value="yenilenebilir" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/yenilenebilir.jpg" alt="Yenilenebilir Enerji (Rüzgar / Güneş)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Yenilenebilir Enerji (Rüzgar / Güneş)</span>
+              <span class="image-caption">Yenilenebilir Enerji (Rüzgar / Güneş)</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="fosil" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/fosil.jpg" alt="Fosil Yakıtlar (Kömür / Petrol)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Fosil Yakıtlar (Kömür / Petrol)</span>
+              <span class="image-caption">Fosil Yakıtlar (Kömür / Petrol)</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="nukleer" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/nukleer.jpg" alt="Nükleer Enerji (Uranyum)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Nükleer Enerji (Uranyum)</span>
+              <span class="image-caption">Nükleer Enerji (Uranyum)</span>
+            </span>
+          </button>
+        </div>
+        <div class="nav-row">
+          <button id="back-to-water-btn" class="secondary-btn" type="button">Geri</button>
+          <button id="to-result-btn" class="action-btn" type="button" disabled>Devam Et</button>
         </div>
       </section>
 
@@ -933,6 +1039,9 @@
         bm: document.getElementById("screen-bm"),
         internet: document.getElementById("screen-internet"),
         seyahat: document.getElementById("screen-seyahat"),
+        heating: document.getElementById("screen-heating"),
+        water: document.getElementById("screen-water"),
+        energy: document.getElementById("screen-energy"),
         result: document.getElementById("screen-result"),
       };
 
@@ -947,6 +1056,9 @@
       const backToTriviaBtn = document.getElementById("back-to-trivia-btn");
       const backToBmBtn = document.getElementById("back-to-bm-btn");
       const backToInternetBtn = document.getElementById("back-to-internet-btn");
+      const backToSeyahatBtn = document.getElementById("back-to-seyahat-btn");
+      const backToHeatingBtn = document.getElementById("back-to-heating-btn");
+      const backToWaterBtn = document.getElementById("back-to-water-btn");
       const toFoodBtn = document.getElementById("to-food-btn");
       const toDrinkBtn = document.getElementById("to-drink-btn");
       const toCoffeeBtn = document.getElementById("to-coffee-btn");
@@ -956,7 +1068,10 @@
       const toBmBtn = document.getElementById("to-bm-btn");
       const toInternetBtn = document.getElementById("to-internet-btn");
       const toSeyahatBtn = document.getElementById("to-seyahat-btn");
+      const toWaterBtn = document.getElementById("to-water-btn");
+      const toEnergyBtn = document.getElementById("to-energy-btn");
       const calculateBtn = document.getElementById("calculate-btn");
+      const toResultBtn = document.getElementById("to-result-btn");
       const retryBtn = document.getElementById("retry-btn");
 
       const transportButtons = Array.from(document.querySelectorAll("#transport-options .option-btn"));
@@ -968,6 +1083,9 @@
       const triviaButtons = Array.from(document.querySelectorAll("#trivia-options .option-btn"));
       const bmButtons = Array.from(document.querySelectorAll("#bm-options .option-btn"));
       const seyahatButtons = Array.from(document.querySelectorAll("#seyahat-options .option-btn"));
+      const heatingButtons = Array.from(document.querySelectorAll("#heating-options .option-btn"));
+      const waterButtons = Array.from(document.querySelectorAll("#water-options .option-btn"));
+      const energyButtons = Array.from(document.querySelectorAll("#energy-options .option-btn"));
       const internetSlider = document.getElementById("internet-slider");
       const internetDisplay = document.getElementById("internet-display");
 
@@ -984,30 +1102,33 @@
 
       const EMISSION_VALUES = {
         transport: {
-          araba: 23.3,
-          metro: 4.9,
+          araba: 1.71,
+          metro: 0.5,
           yuruyerek_bisiklet: 0,
         },
         food: {
-          etli: 7.1,
-          vegan: 3.8,
+          etli: 4.5,
+          vegan: 0.8,
         },
         drink: {
-          evet: 0.32,
+          evet: 0.17,
           hayir: 0,
+          kupada: 0.08,
         },
         coffee: {
           Termos: 0.1,
-          Tek_Kullanimlik: 0.5,
+          Tek_Kullanimlik: 0.4,
+          Fincan: 0.2,
         },
         media: {
-          evet: 0.2,
-          eglence_icin: 0.5,
+          evet: -0.3,
+          eglence_icin: 0.1,
           hayir: 0,
         },
         cop: {
           dikkatsiz: 2.5,
           sinirli: 1.0,
+          sifir: 0.2,
           kompost: 0,
         },
         trivia: {
@@ -1017,7 +1138,7 @@
         },
         bm: {
           5: 0,
-          10: 0,
+          9: 0,
           17: 0,
         },
         seyahat: {
@@ -1025,6 +1146,21 @@
           az: 1.5,
           orta: 4.0,
           cok: 9.0,
+        },
+        heating: {
+          dogalgaz: 2.5,
+          elektrik: 1.5,
+          soba: 4.5,
+        },
+        water: {
+          aritma: 0.15,
+          kaynak: 0.5,
+          sebeke: 0.05,
+        },
+        energy: {
+          yenilenebilir: 0.05,
+          fosil: 2.5,
+          nukleer: 0.3,
         },
       };
 
@@ -1039,6 +1175,12 @@
         bm: null,
         internetHours: null,
         seyahat: null,
+        heatingValue: null,
+        heatingEmission: 0,
+        waterValue: null,
+        waterEmission: 0,
+        energyValue: null,
+        energyEmission: 0,
       };
 
       function getInternetEmission(hours) {
@@ -1100,18 +1242,30 @@
           total += EMISSION_VALUES.seyahat[state.seyahat];
         }
 
+        if (typeof state.heatingEmission === "number") {
+          total += state.heatingEmission;
+        }
+
+        if (typeof state.waterEmission === "number") {
+          total += state.waterEmission;
+        }
+
+        if (typeof state.energyEmission === "number") {
+          total += state.energyEmission;
+        }
+
         return total;
       }
 
       function setCounterTone(total) {
         carbonCounter.classList.remove("low", "medium", "high");
 
-        if (total < 10) {
+        if (total < 8) {
           carbonCounter.classList.add("low");
           return;
         }
 
-        if (total <= 17) {
+        if (total <= 20) {
           carbonCounter.classList.add("medium");
           return;
         }
@@ -1199,6 +1353,33 @@
         calculateBtn.disabled = !state.seyahat;
       }
 
+      function updateHeatingContinueButton() {
+        toWaterBtn.disabled = !state.heatingValue;
+      }
+
+      function updateHeatingSelection() {
+        state.heatingEmission = state.heatingValue ? EMISSION_VALUES.heating[state.heatingValue] : 0;
+        updateHeatingContinueButton();
+      }
+
+      function updateWaterContinueButton() {
+        toEnergyBtn.disabled = !state.waterValue;
+      }
+
+      function updateWaterSelection() {
+        state.waterEmission = state.waterValue ? EMISSION_VALUES.water[state.waterValue] : 0;
+        updateWaterContinueButton();
+      }
+
+      function updateEnergyContinueButton() {
+        toResultBtn.disabled = !state.energyValue;
+      }
+
+      function updateEnergySelection() {
+        state.energyEmission = state.energyValue ? EMISSION_VALUES.energy[state.energyValue] : 0;
+        updateEnergyContinueButton();
+      }
+
       function updateCalculateButton() {
         calculateBtn.disabled = !state.bm;
       }
@@ -1214,6 +1395,12 @@
         state.bm = null;
         state.internetHours = null;
         state.seyahat = null;
+        state.heatingValue = null;
+        state.heatingEmission = 0;
+        state.waterValue = null;
+        state.waterEmission = 0;
+        state.energyValue = null;
+        state.energyEmission = 0;
 
         transportButtons.forEach((b) => b.classList.remove("selected"));
         foodButtons.forEach((b) => b.classList.remove("selected"));
@@ -1224,6 +1411,9 @@
         triviaButtons.forEach((b) => b.classList.remove("selected"));
         bmButtons.forEach((b) => b.classList.remove("selected"));
         seyahatButtons.forEach((b) => b.classList.remove("selected"));
+        heatingButtons.forEach((b) => b.classList.remove("selected"));
+        waterButtons.forEach((b) => b.classList.remove("selected"));
+        energyButtons.forEach((b) => b.classList.remove("selected"));
 
         toFoodBtn.disabled = true;
         toDrinkBtn.disabled = true;
@@ -1235,6 +1425,9 @@
         toInternetBtn.disabled = true;
         toSeyahatBtn.disabled = true;
         calculateBtn.disabled = true;
+        toWaterBtn.disabled = true;
+        toEnergyBtn.disabled = true;
+        toResultBtn.disabled = true;
 
         internetSlider.value = "4";
         internetDisplay.textContent = "4 saat";
@@ -1260,6 +1453,9 @@
         const copEmission = state.cop ? EMISSION_VALUES.cop[state.cop] : 0;
         const internetEmission = typeof state.internetHours === "number" ? getInternetEmission(state.internetHours) : 0;
         const travelEmission = state.seyahat ? EMISSION_VALUES.seyahat[state.seyahat] : 0;
+        const heatingEmission = typeof state.heatingEmission === "number" ? state.heatingEmission : 0;
+        const waterEmission = typeof state.waterEmission === "number" ? state.waterEmission : 0;
+        const energyEmission = typeof state.energyEmission === "number" ? state.energyEmission : 0;
 
         const subtotal =
           transportEmission +
@@ -1269,7 +1465,10 @@
           mediaEmission +
           copEmission +
           internetEmission +
-          travelEmission;
+          travelEmission +
+          heatingEmission +
+          waterEmission +
+          energyEmission;
 
         let correctAnswerCount = 0;
         if (state.trivia === "areka") correctAnswerCount += 1;
@@ -1278,12 +1477,12 @@
         const totalEmission = Math.max(0, subtotal - correctAnswerCount * 0.3);
 
         let icon, title, subtitle, titleClass;
-        if (totalEmission < 4) {
+        if (totalEmission < 8) {
           icon = "🌍";
           title = "Sürdürülebilirlik Kahramanısın!";
           subtitle = "Gezegenimiz seninle gurur duyuyor.";
           titleClass = "result-tier-title hero";
-        } else if (totalEmission <= 10) {
+        } else if (totalEmission <= 20) {
           icon = "🌱";
           title = "İyi Gidiyorsun, Ama Daha İyisi Mümkün!";
           subtitle = "Küçük değişiklikler büyük fark yaratır.";
@@ -1332,6 +1531,9 @@
         const copValue = state.cop;
         const internetHours = typeof state.internetHours === "number" ? state.internetHours : 0;
         const travelValue = state.seyahat;
+        const heatingValue = state.heatingValue;
+        const waterValue = state.waterValue;
+        const energyValue = state.energyValue;
 
         const tips = [];
         const addTip = (text) => {
@@ -1361,6 +1563,18 @@
         if (travelValue === "cok") addTip("Uzun mesafe seyahatlerde uçak yerine tren alternatiflerini araştırabilirsin.");
         if (travelValue === "orta") addTip("Seyahat ettiğinde karbon dengeleme programlarına katılmayı düşünebilirsin.");
 
+        if (heatingValue === "soba") addTip("Kömür veya odun sobası yerine daha temiz ısınma sistemlerine geçmeyi düşünebilirsin.");
+        if (heatingValue === "dogalgaz") addTip("Kombini düşük sıcaklıkta tutmak ve iyi yalıtım yapmak enerji tüketimini önemli ölçüde azaltır.");
+        if (heatingValue === "elektrik") addTip("Elektrikli ısıtıcını akıllı termostat ile kontrol ederek gereksiz enerji harcamasını önleyebilirsin.");
+
+        if (waterValue === "kaynak") addTip("Şişelenmiş kaynak suyu yerine ev arıtma sistemi veya şebeke suyu kullanmak plastik atığı ve karbon emisyonunu önemli ölçüde azaltır.");
+        if (waterValue === "aritma") addTip("Arıtma sistemi kullanman bilinçli bir tercih! Filtre kartuşlarını düzenli değiştirmeyi unutma.");
+        if (waterValue === "sebeke") addTip("Şebeke suyunu tercih etmen karbon ayak izin için harika. Bir süzgeç ekleyerek kaliteyi artırabilirsin.");
+
+        if (energyValue === "fosil") addTip("Enerji sağlayıcını yenilenebilir enerji sunan bir şirkete geçirmeyi araştırabilirsin. Güneş paneli yatırımı uzun vadede hem tasarruf hem de sıfır emisyon sağlar.");
+        if (energyValue === "nukleer") addTip("Nükleer enerji düşük karbonlu bir seçim. Evde enerji verimliliğini artırmak için LED ampul ve A+++ cihazlar kullanmayı düşünebilirsin.");
+        if (energyValue === "yenilenebilir") addTip("Yenilenebilir enerji kullanman mükemmel bir tercih! Enerji tüketimini azaltmak için cihazlarını bekleme modunda bırakmamaya özen göster.");
+
         if (totalEmission < 3) addTip("Sen zaten çok bilinçli bir bireysin. Çevreni de bu konuda teşvik etmeyi unutma! 🌍");
 
         for (let i = tips.length - 1; i > 0; i -= 1) {
@@ -1387,19 +1601,19 @@
       });
 
       backToTransportBtn.addEventListener("click", () => {
-        showScreen("transport");
-      });
-
-      backToFoodBtn.addEventListener("click", () => {
-        showScreen("food");
-      });
-
-      backToDrinkBtn.addEventListener("click", () => {
         showScreen("drink");
       });
 
-      backToCoffeeBtn.addEventListener("click", () => {
+      backToFoodBtn.addEventListener("click", () => {
         showScreen("coffee");
+      });
+
+      backToDrinkBtn.addEventListener("click", () => {
+        showScreen("transport");
+      });
+
+      backToCoffeeBtn.addEventListener("click", () => {
+        showScreen("food");
       });
 
       backToMediaBtn.addEventListener("click", () => {
@@ -1422,20 +1636,32 @@
         showScreen("internet");
       });
 
+      backToSeyahatBtn.addEventListener("click", () => {
+        showScreen("seyahat");
+      });
+
+      backToHeatingBtn.addEventListener("click", () => {
+        showScreen("heating");
+      });
+
+      backToWaterBtn.addEventListener("click", () => {
+        showScreen("water");
+      });
+
       toFoodBtn.addEventListener("click", () => {
-        showScreen("food");
-      });
-
-      toDrinkBtn.addEventListener("click", () => {
-        showScreen("drink");
-      });
-
-      toCoffeeBtn.addEventListener("click", () => {
         showScreen("coffee");
       });
 
-      toMediaBtn.addEventListener("click", () => {
+      toDrinkBtn.addEventListener("click", () => {
         showScreen("media");
+      });
+
+      toCoffeeBtn.addEventListener("click", () => {
+        showScreen("food");
+      });
+
+      toMediaBtn.addEventListener("click", () => {
+        showScreen("drink");
       });
 
       toCopBtn.addEventListener("click", () => {
@@ -1463,6 +1689,19 @@
         showScreen("seyahat");
       });
 
+      toWaterBtn.addEventListener("click", () => {
+        showScreen("water");
+      });
+
+      toEnergyBtn.addEventListener("click", () => {
+        showScreen("energy");
+      });
+
+      toResultBtn.addEventListener("click", () => {
+        showScreen("result");
+        calculateEmission();
+      });
+
       internetSlider.addEventListener("input", () => {
         state.internetHours = parseInt(internetSlider.value, 10);
         internetDisplay.textContent = state.internetHours + " saat";
@@ -1471,8 +1710,7 @@
       });
 
       calculateBtn.addEventListener("click", () => {
-        showScreen("result");
-        calculateEmission();
+        showScreen("heating");
       });
 
       retryBtn.addEventListener("click", () => {
@@ -1489,6 +1727,9 @@
       setupSingleSelection(triviaButtons, "trivia", updateTriviaContinueButton);
       setupSingleSelection(bmButtons, "bm", updateBmContinueButton);
       setupSingleSelection(seyahatButtons, "seyahat", updateSeyahatContinueButton);
+      setupSingleSelection(heatingButtons, "heatingValue", updateHeatingSelection);
+      setupSingleSelection(waterButtons, "waterValue", updateWaterSelection);
+      setupSingleSelection(energyButtons, "energyValue", updateEnergySelection);
       resetState();
     </script>
   </body>
