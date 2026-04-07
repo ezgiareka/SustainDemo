@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
     <title>İklim Fuarı - Seçim Oyunu</title>
+    <script>
+      const RESULT_EMAIL_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxRyoVfxaTdJiU7MwO_5AK7WHywDNX6ynVFi9geCcK-HDH0KZQ5D6a5_f0LnKH4X3OTmQ/exec";
+    </script>
     <style>
       :root {
         --bg-1: #ecfdf3;
@@ -564,6 +567,57 @@
         margin-bottom: 0;
       }
 
+      #email-section {
+        background: #f1f8e9;
+        border: 1px solid #a5d6a7;
+        border-radius: 12px;
+        padding: 24px;
+        margin: 24px 0;
+      }
+
+      #email-section h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        color: #2e7d32;
+        font-weight: 700;
+      }
+
+      #email-section p {
+        margin: 0;
+      }
+
+      #userEmail {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #a5d6a7;
+        border-radius: 8px;
+        font-size: 14px;
+        margin: 12px 0;
+        box-sizing: border-box;
+      }
+
+      #sendEmailBtn {
+        background: #388e3c;
+        color: #ffffff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 8px;
+      }
+
+      #sendEmailBtn:hover {
+        background: #2e7d32;
+      }
+
+      #emailStatus {
+        font-size: 13px;
+        margin-top: 8px;
+        text-align: center;
+      }
+
       #screen-welcome {
         max-width: 1100px;
         padding: 120px 80px;
@@ -1013,9 +1067,9 @@
       <section id="screen-result" class="screen">
         <div class="result">
           <div id="result-tier-icon" class="result-tier-icon"></div>
-          <p id="result-tier-title" class="result-tier-title"></p>
+          <p id="result-tier" class="result-tier-title"></p>
           <p id="result-tier-subtitle" class="result-tier-subtitle"></p>
-          <p id="result-total" class="result-total"></p>
+          <p id="total-emission" class="result-total"></p>
           <div class="progress-wrap">
             <div class="progress-track">
               <div id="progress-fill" class="progress-fill">
@@ -1024,9 +1078,16 @@
             </div>
             <div id="progress-label" class="progress-label"></div>
           </div>
-          <div id="result-tips" class="result-tips" hidden>
+          <div id="tips-section" class="result-tips" hidden>
             <p class="result-tips-title">💡 Sana Özel Öneriler</p>
             <div id="result-tips-list" class="result-tips-list"></div>
+          </div>
+          <div id="email-section">
+            <h3>📧 Sonucunu e-posta olarak al!</h3>
+            <p>Mail adresini gir, sonuçların sana ulaşsın.</p>
+            <input type="email" id="userEmail" placeholder="ornek@mail.com" />
+            <button id="sendEmailBtn" onclick="sendResultEmail()">Sonucumu Gönder 🌱</button>
+            <p id="emailStatus"></p>
           </div>
           <button id="retry-btn" class="action-btn" type="button">Tekrar Oyna</button>
         </div>
@@ -1097,15 +1158,63 @@
       const internetDisplay = document.getElementById("internet-display");
 
       const resultTierIcon = document.getElementById("result-tier-icon");
-      const resultTierTitle = document.getElementById("result-tier-title");
+      const resultTierTitle = document.getElementById("result-tier");
       const resultTierSubtitle = document.getElementById("result-tier-subtitle");
-      const resultTotal = document.getElementById("result-total");
+      const resultTotal = document.getElementById("total-emission");
       const progressFill = document.getElementById("progress-fill");
       const progressLabel = document.getElementById("progress-label");
-      const resultTips = document.getElementById("result-tips");
+      const resultTips = document.getElementById("tips-section");
       const resultTipsList = document.getElementById("result-tips-list");
       const carbonCounter = document.getElementById("carbon-counter");
       const carbonCounterText = document.getElementById("carbon-counter-text");
+
+      function sendResultEmail() {
+        const email = document.getElementById("userEmail").value.trim();
+        const statusEl = document.getElementById("emailStatus");
+
+        if (!email || !email.includes("@")) {
+          statusEl.style.color = "red";
+          statusEl.textContent = "⚠️ Lütfen geçerli bir mail adresi gir.";
+          return;
+        }
+
+        const btn = document.getElementById("sendEmailBtn");
+        btn.disabled = true;
+        btn.textContent = "Gönderiliyor...";
+        statusEl.style.color = "#555";
+        statusEl.textContent = "📨 Mail gönderiliyor...";
+
+        const onerilerText = Array.from(document.querySelectorAll("#tips-section p"))
+          .map((p) => p.textContent)
+          .join("\n");
+
+        const resultTierText = document.getElementById("result-tier").textContent;
+        const emissionText = document.getElementById("total-emission").textContent;
+
+        fetch(RESULT_EMAIL_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify({
+            secret: "areka2024",
+            email: email,
+            sonuc: resultTierText,
+            emisyon: emissionText,
+            oneriler: onerilerText,
+          }),
+        })
+          .then(() => {
+            statusEl.style.color = "green";
+            statusEl.textContent = "✅ Sonuçların mail adresine gönderildi!";
+            btn.textContent = "✔ Gönderildi";
+          })
+          .catch((error) => {
+            console.error("Email gönderim hatası:", error);
+            statusEl.style.color = "red";
+            statusEl.textContent = "❌ Bir bağlantı hatası oluştu, tekrar dene.";
+            btn.disabled = false;
+            btn.textContent = "Sonucumu Gönder 🌱";
+          });
+      }
 
       const EMISSION_VALUES = {
         transport: {
@@ -1449,6 +1558,11 @@
         progressLabel.textContent = "";
         resultTips.hidden = true;
         resultTipsList.innerHTML = "";
+        document.getElementById("userEmail").value = "";
+        document.getElementById("emailStatus").textContent = "";
+        document.getElementById("emailStatus").style.color = "";
+        document.getElementById("sendEmailBtn").disabled = false;
+        document.getElementById("sendEmailBtn").textContent = "Sonucumu Gönder 🌱";
         resetCarbonCounter();
       }
 
