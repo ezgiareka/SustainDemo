@@ -1169,16 +1169,20 @@
       const carbonCounterText = document.getElementById("carbon-counter-text");
 
       function sendResultEmail() {
-        const email = document.getElementById("userEmail").value.trim();
+        const emailInput = document.getElementById("userEmail");
+        const email = emailInput.value.trim();
         const statusEl = document.getElementById("emailStatus");
+        const btn = document.getElementById("sendEmailBtn");
+        const strictEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-        if (!email || !email.includes("@")) {
+        emailInput.value = email;
+
+        if (!emailInput.checkValidity() || !strictEmailPattern.test(email)) {
           statusEl.style.color = "red";
-          statusEl.textContent = "⚠️ Lütfen geçerli bir mail adresi gir.";
+          statusEl.textContent = "⚠️ Mail uygun formatta değil.";
           return;
         }
 
-        const btn = document.getElementById("sendEmailBtn");
         btn.disabled = true;
         btn.textContent = "Gönderiliyor...";
         statusEl.style.color = "#555";
@@ -1205,7 +1209,8 @@
           .then(() => {
             statusEl.style.color = "green";
             statusEl.textContent = "✅ Sonuçların mail adresine gönderildi!";
-            btn.textContent = "✔ Gönderildi";
+            btn.disabled = false;
+            btn.textContent = "Tekrar Gönder 🌱";
           })
           .catch((error) => {
             console.error("Email gönderim hatası:", error);
@@ -1664,15 +1669,16 @@
 
         if (transportValue === "araba") addTip("Tek başına araba kullanmak yerine toplu taşıma veya bisiklet tercih edebilirsin.");
         if (transportValue === "toplu_tasima") addTip("Toplu taşıma kullandığın için harika! Kısa mesafelerde yürümeyi de deneyebilirsin.");
-        if (transportValue === "bisiklet") addTip("Bisiklet seçimin mükemmel! Bu alışkanlığı korumaya devam et.");
+        if (transportValue === "bisiklet") addTip("Bisiklet/yürüme seçimin mükemmel! Bu alışkanlığı korumaya devam et.");
 
         if (coffeeValue === "karton_bardak") addTip("Tek kullanımlık bardak yerine kendi termosunu yanında taşıyabilirsin.");
-        if (coffeeValue === "termos") addTip("Termos kullanman çok bilinçli bir tercih, aferin!");
+        if (coffeeValue === "termos") addTip("Termos kullanman çok bilinçli bir tercih, böyle devam et!");
 
-        if (drinkValue === "su_sisesi") addTip("Şişelenmiş su yerine filtreli su ve tekrar kullanılabilir matara kullanmayı düşünebilirsin.");
+        if (drinkValue === "su_sisesi") addTip("Şişelenmiş su yerine tekrar kullanılabilir matara kullanmayı düşünebilirsin.");
 
         if (foodValue === "etli") addTip("Haftada 1-2 gün etsiz beslenmeyi deneyebilirsin, büyük fark yaratır.");
         if (foodValue === "vegan") addTip("Bitki bazlı beslenmen karbon ayak izini önemli ölçüde azaltıyor!");
+        if(foodValue === "karisik") addTip("Et tüketimini azaltarak karbon ayak izini düşürebilirsin. Haftada birkaç gün etsiz beslenmeyi deneyebilirsin.");
 
         if (mediaValue === "eglence" || mediaValue === "paylasmadim") addTip("Sürdürülebilirlik içerikleri paylaşarak çevrendeki insanları da bilinçlendirebilirsin.");
 
@@ -1680,7 +1686,7 @@
         if (copValue === "sinirli") addTip("Sıfır atık hedefine ulaşmak için alışverişte ambalajsız ürünleri tercih edebilirsin.");
         if (copValue === "kompost") addTip("Kompost yapman harika! Kompostunu bir topluluk bahçesiyle paylaşmayı düşünebilirsin.");
 
-        if (internetHours >= 7) addTip("Günlük internet kullanımını azaltmak hem karbon izini düşürür hem de sana zaman kazandırır.");
+        if (internetHours >= 7) addTip("Günlük internet kullanımını azaltmak hem karbon ayak izini düşürür hem de sana zaman kazandırır.");
 
         if (travelValue === "cok") addTip("Uzun mesafe seyahatlerde uçak yerine tren alternatiflerini araştırabilirsin.");
         if (travelValue === "orta") addTip("Seyahat ettiğinde karbon dengeleme programlarına katılmayı düşünebilirsin.");
@@ -1852,6 +1858,16 @@
       setupSingleSelection(heatingButtons, "heatingValue", updateHeatingSelection);
       setupSingleSelection(waterButtons, "waterValue", updateWaterSelection);
       setupSingleSelection(energyButtons, "energyValue", updateEnergySelection);
+
+      document.getElementById("userEmail").addEventListener("input", () => {
+        const statusEl = document.getElementById("emailStatus");
+        const sendBtn = document.getElementById("sendEmailBtn");
+        statusEl.textContent = "";
+        statusEl.style.color = "";
+        sendBtn.disabled = false;
+        sendBtn.textContent = "Sonucumu Gönder 🌱";
+      });
+
       resetState();
     </script>
   </body>
