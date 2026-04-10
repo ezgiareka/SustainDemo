@@ -962,9 +962,27 @@
       <section id="screen-seyahat" class="screen">
         <h2>Son üç yılda ne sıklıkla uçakla seyahat ettiniz?</h2>
         <div id="seyahat-options" class="options">
-          <button class="option-btn" data-value="hic" type="button">Hiç uçmadım ✈️❌</button>
-          <button class="option-btn" data-value="az" type="button">1-2 kez 🌍</button>
-          <button class="option-btn" data-value="orta" type="button">3-5 kez ✈️</button>
+          <button class="option-btn image-option" data-value="hic" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/bilet_yok.png" alt="Hiç uçmadım" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">Hiç uçmadım</span>
+              <span class="image-caption">Hiç uçmadım</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="az" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/bilet.png" alt="1-3 kez" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">1-3 kez</span>
+              <span class="image-caption">1-3 kez</span>
+            </span>
+          </button>
+          <button class="option-btn image-option" data-value="orta" type="button">
+            <span class="image-option-media">
+              <img src="assets/images/cok_bilet.png" alt="3-5 kez" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <span class="image-fallback">3-5 kez</span>
+              <span class="image-caption">3-5 kez</span>
+            </span>
+          </button>
         </div>
         <div class="nav-row">
           <button id="back-to-internet-btn" class="secondary-btn" type="button">Geri</button>
