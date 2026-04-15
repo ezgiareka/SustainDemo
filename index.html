@@ -1047,7 +1047,7 @@
           </button>
           <button class="option-btn image-option" data-value="kaynak" type="button">
             <span class="image-option-media">
-              <img src="assets/images/kaynak.jpg" alt="Kaynak Suyu (Şişe)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <img src="assets/images/damacana.png" alt="Kaynak Suyu (Şişe)" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
               <span class="image-fallback">Kaynak Suyu (Şişe) </span>
               <span class="image-caption">Kaynak Suyu (Şişe) </span>
             </span>
@@ -1221,9 +1221,7 @@
         statusEl.style.color = "#555";
         statusEl.textContent = "📨 Mail gönderiliyor...";
 
-        const onerilerText = Array.from(document.querySelectorAll("#tips-section p"))
-          .map((p) => p.textContent)
-          .join("\n");
+        const onerilerText = Array.from(document.querySelectorAll('#tips-section p:not(.tips-title)')).map(p => p.textContent.trim()).join('\n');
 
         const resultTierText = document.getElementById("result-tier").textContent;
         const emissionText = document.getElementById("total-emission").textContent;
@@ -1287,14 +1285,14 @@
           kompost: 0,
         },
         trivia: {
-          areka: 0,
+          areka: -0.3,
           sarmasik: 0,
           kaktus: 0,
         },
         bm: {
           5: 0,
           9: 0,
-          17: 0,
+          17: -0.3,
         },
         seyahat: {
           hic: 0,
@@ -1338,20 +1336,8 @@
         energyEmission: 0,
       };
 
-      function getInternetEmission(hours) {
-        if (hours <= 2) {
-          return 0.1;
-        }
-
-        if (hours <= 6) {
-          return 0.3;
-        }
-
-        if (hours <= 10) {
-          return 0.7;
-        }
-
-        return 1.2;
+      function getInternetEmission(hours){
+        return hours * 0.055;
       }
 
       function getRunningEmissionTotal() {
@@ -1701,8 +1687,8 @@
         };
 
         if (transportValue === "araba") addTip("Tek başına araba kullanmak yerine toplu taşıma veya bisiklet tercih edebilirsin.");
-        if (transportValue === "toplu_tasima") addTip("Toplu taşıma kullandığın için harika! Kısa mesafelerde yürümeyi de deneyebilirsin.");
-        if (transportValue === "bisiklet") addTip("Bisiklet/yürüme seçimin mükemmel! Bu alışkanlığı korumaya devam et.");
+        if (transportValue === "toplu_tasima") addTip("Toplu taşıma kullanman çok bilinçli bir tercih. Kısa mesafelerde yürümeyi de deneyebilirsin.");
+        if (transportValue === "bisiklet") addTip("Bisiklet/yürüme hem sağlığın hem de doğa için mükemmel bir tercih. Bu alışkanlığı korumaya devam et.");
 
         if (coffeeValue === "karton_bardak") addTip("Tek kullanımlık bardak yerine kendi termosunu yanında taşıyabilirsin.");
         if (coffeeValue === "termos") addTip("Termos kullanman çok bilinçli bir tercih, böyle devam et!");
@@ -1719,7 +1705,7 @@
         if (copValue === "sinirli") addTip("Sıfır atık hedefine ulaşmak için alışverişte ambalajsız ürünleri tercih edebilirsin.");
         if (copValue === "kompost") addTip("Kompost yapman harika! Kompostunu bir topluluk bahçesiyle paylaşmayı düşünebilirsin.");
 
-        if (internetHours >= 7) addTip("Günlük internet kullanımını azaltmak hem karbon ayak izini düşürür hem de sana zaman kazandırır.");
+        if (internetHours >= 5) addTip("Günlük internet kullanımını azaltmak hem karbon ayak izini düşürür hem de sana zaman kazandırır.");
 
         if (travelValue === "cok") addTip("Uzun mesafe seyahatlerde uçak yerine tren alternatiflerini araştırabilirsin.");
         if (travelValue === "orta") addTip("Seyahat ettiğinde karbon dengeleme programlarına katılmayı düşünebilirsin.");
@@ -1728,15 +1714,15 @@
         if (heatingValue === "dogalgaz") addTip("Kombini düşük sıcaklıkta tutmak ve iyi yalıtım yapmak enerji tüketimini önemli ölçüde azaltır.");
         if (heatingValue === "elektrik") addTip("Elektrikli ısıtıcını akıllı termostat ile kontrol ederek gereksiz enerji harcamasını önleyebilirsin.");
 
-        if (waterValue === "kaynak") addTip("Şişelenmiş kaynak suyu yerine ev arıtma sistemi veya şebeke suyu kullanmak plastik atığı ve karbon emisyonunu önemli ölçüde azaltır.");
+        if (waterValue === "kaynak") addTip("Şişelenmiş kaynak suyu yerine ev arıtma sistemi kullanmak plastik atığı ve karbon emisyonunu önemli ölçüde azaltır.");
         if (waterValue === "aritma") addTip("Arıtma sistemi kullanman bilinçli bir tercih! Filtre kartuşlarını düzenli değiştirmeyi unutma.");
-        if (waterValue === "sebeke") addTip("Şebeke suyunu tercih etmen karbon ayak izin için harika. Bir süzgeç ekleyerek kaliteyi artırabilirsin.");
+        if (waterValue === "sebeke") addTip("Şebeke suyunu tercih etmen karbon ayak izin düşürür. Bir süzgeç ekleyerek kaliteyi artırabilirsin.");
 
         if (energyValue === "fosil") addTip("Enerji sağlayıcını yenilenebilir enerji sunan bir şirkete geçirmeyi araştırabilirsin. Güneş paneli yatırımı uzun vadede hem tasarruf hem de sıfır emisyon sağlar.");
         if (energyValue === "nukleer") addTip("Nükleer enerji düşük karbonlu bir seçim. Evde enerji verimliliğini artırmak için LED ampul ve A+++ cihazlar kullanmayı düşünebilirsin.");
         if (energyValue === "yenilenebilir") addTip("Yenilenebilir enerji kullanman mükemmel bir tercih! Enerji tüketimini azaltmak için cihazlarını bekleme modunda bırakmamaya özen göster.");
 
-        if (totalEmission < 3) addTip("Sen zaten çok bilinçli bir bireysin. Çevreni de bu konuda teşvik etmeyi unutma! 🌍");
+        if (totalEmission < 4) addTip("Sen zaten çok bilinçli bir bireysin. Çevreni de bu konuda teşvik etmeyi unutma! 🌍");
 
         for (let i = tips.length - 1; i > 0; i -= 1) {
           const j = Math.floor(Math.random() * (i + 1));
